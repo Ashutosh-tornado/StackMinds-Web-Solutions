@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StackMinds Web Solutions | Grow Your Digital Business</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-fixed-variant": "#1e40af",
+                "error-container": "#f76a80",
+                "inverse-primary": "#60a5fa",
+                "on-error": "#fff7f7",
+                "on-surface": "#213156",
+                "tertiary-fixed-dim": "#00ec9a",
+                "tertiary-container": "#1dfba5",
+                "secondary-container": "#b7eaff",
+                "surface-variant": "#d9e2ff",
+                "surface-tint": "#1e40af",
+                "primary": "#1e40af",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary": "#f1faff",
+                "outline": "#6a7aa3",
+                "on-tertiary-fixed": "#00452a",
+                "tertiary": "#006d45",
+                "on-surface-variant": "#4f5e86",
+                "surface-container": "#eaedff",
+                "surface-bright": "#faf8ff",
+                "secondary-fixed-dim": "#8ae0ff",
+                "outline-variant": "#a2b1dd",
+                "surface-container-high": "#e2e7ff",
+                "error-dim": "#770326",
+                "on-secondary-container": "#00596f",
+                "primary-dim": "#1e3a8a",
+                "secondary-dim": "#005b70",
+                "surface": "#faf8ff",
+                "on-primary-container": "#001d63",
+                "on-tertiary": "#e7ffed",
+                "on-secondary-fixed-variant": "#00647b",
+                "on-tertiary-container": "#005a38",
+                "tertiary-fixed": "#1dfba5",
+                "on-primary": "#fcf7ff",
+                "secondary-fixed": "#b7eaff",
+                "on-secondary-fixed": "#004657",
+                "on-error-container": "#68001f",
+                "primary-container": "#dbeafe",
+                "surface-dim": "#cdd9ff",
+                "surface-container-highest": "#d9e2ff",
+                "surface-container-low": "#f2f3ff",
+                "background": "#faf8ff",
+                "error": "#ac3149",
+                "on-background": "#213156",
+                "tertiary-dim": "#00603c",
+                "secondary": "#006880",
+                "primary-fixed": "#dbeafe",
+                "on-primary-fixed": "#001d63",
+                "primary-fixed-dim": "#bfdbfe",
+                "on-tertiary-fixed-variant": "#00653f",
+                "inverse-on-surface": "#959cb5",
+                "inverse-surface": "#060e20"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Manrope"],
+                "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #006880 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .asymmetric-shape {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .service-pill {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .service-pill:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .card-gradient-border {
+            position: relative;
+            background: #fff;
+            background-clip: padding-box;
+            border: 1px solid transparent;
+        }
+        .card-gradient-border::before {
+            content: "";
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(30,64,175,0.1), rgba(0,236,154,0.1));
+        }
+        
+        /* New Styles for Dropdown */
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Updated with shared component structure & Dropdown) -->
+<nav class="fixed top-0 w-full z-50 bg-[#faf8ff]/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(33,49,86,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-[#213156] dark:text-white tracking-tighter font-headline">
+            StackMinds
+        </div>
+<div class="hidden md:flex items-center gap-8 font-['Plus_Jakarta_Sans'] font-bold text-sm tracking-tight">
+<a class="text-[#623fde] border-b-2 border-[#623fde] pb-1 transition-colors duration-300" href="#">Home</a>
+<div class="relative group">
+<button class="flex items-center gap-1 text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300">
+                    Services <span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+<!-- Services Dropdown -->
+<div class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-outline-variant/10 py-4 hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-200">
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/web-development">Website Development</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/wordpress">WordPress Websites</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/ecommerce">Ecommerce Development</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/social-media">Social Media Marketing</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/google-ads">Google Ads</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/seo">SEO</a>
+</div>
+</div>
+<a class="text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300" href="#">Portfolio</a>
+<a class="text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300" href="#">Contact</a>
+</div>
+<button class="bg-[#1e40af] text-[#fcf7ff] px-6 py-2.5 rounded-full font-headline font-bold text-sm scale-95 hover:scale-100 active:opacity-80 transition-all duration-200 ease-in-out hover:shadow-lg">
+            Get Started
+        </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative pt-32 pb-12 overflow-hidden">
+<div class="absolute top-0 right-0 w-1/2 h-full bg-surface-container-low asymmetric-shape -z-10"></div>
+<div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest uppercase">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                Next-Gen Digital Solutions
+            </div>
+<h1 class="text-6xl md:text-7xl font-headline font-extrabold text-on-surface leading-[1.1] tracking-tighter">
+                Grow your <span class="text-gradient">digital business</span> with StackMinds
+            </h1>
+<p class="text-xl text-on-surface-variant font-medium leading-relaxed max-w-xl">
+                We build high-performing websites, marketing systems, and digital experiences that help your business scale faster.
+            </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary hover:bg-primary-dim text-on-primary px-8 py-4 rounded-full font-headline font-bold text-lg shadow-xl shadow-primary/20 transition-all">
+                    Get Started
+                </button>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-full font-headline font-bold text-lg hover:bg-surface-container-highest transition-all">
+                    View Portfolio
+                </button>
+</div>
+</div>
+<div class="relative">
+<div class="relative rounded-3xl overflow-hidden shadow-2xl bg-surface-container-lowest p-4">
+<img alt="Modern SaaS Dashboard Mockup" class="rounded-2xl w-full" data-alt="Modern minimalist software dashboard with colorful data visualizations, charts, and clean white interface with purple accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB0aIVNad9oGtWQxhftTFxBwxNtFha6xzhRa-p_IXraFP90kga8PyyNv_axfgxReXuWzCklXB1UkV0lHutxiLxTe2Se39QdHRzeaiyncfEDnmzf_pMQrTySOykTxInGEw-kmNrV29lYFm782few-a3mxyLPGpCFRYLfd5t3n9hBc3bTZwRaqa6O3fAPTxbTPWvZR1iC74Rs55aXaQq3msSEGmZ5nkpGPaFp2NbLgKVgtaqQizYfskf6ANViaqe-ihA1g0nO9WbuA"/>
+<!-- Service Floating Tiles -->
+<div class="absolute -top-6 -right-6 glass-nav p-4 rounded-2xl shadow-xl border border-white/20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<div>
+<div class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Conversion Rate</div>
+<div class="text-lg font-headline font-extrabold text-tertiary">+142%</div>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-6 -left-6 glass-nav p-4 rounded-2xl shadow-xl border border-white/20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<div>
+<div class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Site Speed</div>
+<div class="text-lg font-headline font-extrabold text-secondary">0.8s LCP</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Business Services Enhancement Section -->
+<section class="pb-24 pt-12">
+<div class="max-w-7xl mx-auto px-8">
+<div class="bg-gradient-to-br from-[#8a94ff] to-[#a28aff] rounded-[2.5rem] p-10 md:p-14 text-white relative overflow-hidden shadow-2xl">
+<div class="relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+<h2 class="text-3xl md:text-4xl font-headline font-bold">Business Services</h2>
+<div class="px-5 py-2 rounded-full border border-white/40 bg-white/10 backdrop-blur-md text-sm font-bold uppercase tracking-wider">
+                        10+ Services
+                    </div>
+</div>
+<div class="flex flex-wrap gap-4">
+<a class="service-pill px-6 py-3 rounded-full flex items-center gap-3 font-bold text-sm" href="/services/seo">SEO <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+<a class="service-pill px-6 py-3 rounded-full flex items-center gap-3 font-bold text-sm" href="/services/creative-designing">Graphic Design <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+<a class="service-pill px-6 py-3 rounded-full flex items-center gap-3 font-bold text-sm" href="/services/google-ads">PPC <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+<a class="service-pill px-6 py-3 rounded-full flex items-center gap-3 font-bold text-sm" href="#">Virtual Assistant <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+<a class="service-pill px-6 py-3 rounded-full flex items-center gap-3 font-bold text-sm" href="/services/social-media">Social Media Marketing <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+<a class="service-pill px-6 py-3 rounded-full flex items-center gap-3 font-bold text-sm" href="/services/content-writing">Content Marketing <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+<a class="service-pill px-6 py-3 rounded-full flex items-center gap-3 font-bold text-sm" href="/services/web-development">Web Design &amp; Development <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+<div class="absolute -bottom-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="py-12 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+<div class="p-8 space-y-2">
+<div class="text-5xl font-headline font-extrabold text-primary">100+</div>
+<div class="text-on-surface-variant font-semibold">Projects Delivered</div>
+</div>
+<div class="p-8 space-y-2 border-x border-outline-variant/20">
+<div class="text-5xl font-headline font-extrabold text-secondary">50+</div>
+<div class="text-on-surface-variant font-semibold">Happy Clients</div>
+</div>
+<div class="p-8 space-y-2">
+<div class="text-5xl font-headline font-extrabold text-tertiary">98%</div>
+<div class="text-on-surface-variant font-semibold">High Conversion Focus</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-24 bg-background overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-20 items-center">
+<div class="order-2 lg:order-1 relative">
+<div class="aspect-square rounded-[3rem] bg-gradient-to-br from-primary-container to-secondary-container relative overflow-hidden group">
+<img alt="Team Collaboration" class="w-full h-full object-cover mix-blend-overlay opacity-80 group-hover:scale-110 transition-transform duration-700" data-alt="Candid photo of a diverse creative team collaborating in a bright modern office with soft natural lighting and plants" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIYQsCXApx04WzhToItm_ER0-6AkGpP0WILWyI2SccHbsfKJbpDUwblwnVTNIOptH8_2qQHTVyd1ON5gl2GpelbJOa89XFUFD7DD43GF3ScrbTgWKMzHISkiYq029xiKT5Edvs8IyOnvvwBz4eFbz2T3hk7YoF3nj7sf2DKX2lIekIxGSxUTUDweIDjX-QaDS2TLZlDarM4NYhlrXiPWQ_YXcsgBXMb2H1QFVJS9FTAjmv8ZnfnOfNbPyNGS7lcWgB_IpamYSrqg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+</div>
+</div>
+<div class="order-1 lg:order-2 space-y-6">
+<h2 class="text-4xl md:text-5xl font-headline font-bold text-on-surface leading-tight tracking-tight">
+                We're not just an agency, we're your growth partners.
+            </h2>
+<p class="text-lg text-on-surface-variant leading-relaxed font-body">
+                StackMinds blends creativity and strategy to deliver impactful digital solutions for modern businesses. We believe in building digital products that aren't just beautiful, but are architected for massive scale and seamless performance.
+            </p>
+<ul class="space-y-4 pt-4">
+<li class="flex items-center gap-3 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Strategy-first approach to every project
+                </li>
+<li class="flex items-center gap-3 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Built with modern, high-performance tech stacks
+                </li>
+<li class="flex items-center gap-3 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Continuous support and data-driven optimization
+                </li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Core Values Section -->
+<section class="py-24 bg-surface-container-low/30">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16 space-y-4">
+<h2 class="text-4xl font-headline font-bold text-on-surface">Our Core Values</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto text-lg">The principles that drive our commitment to excellence and client success.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-outline-variant/10 relative overflow-hidden group hover:shadow-xl transition-all">
+<div class="text-sm font-bold text-outline-variant mb-6">01</div>
+<div class="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center mb-6 absolute top-6 right-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">support_agent</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Customer-Centric</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We prioritize our clients and ensure value at every step of the journey.</p>
+</div>
+<div class="bg-white p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-outline-variant/10 relative overflow-hidden group hover:shadow-xl transition-all">
+<div class="text-sm font-bold text-outline-variant mb-6">02</div>
+<div class="w-12 h-12 rounded-full bg-secondary/5 flex items-center justify-center mb-6 absolute top-6 right-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">lightbulb</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Innovation</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We build modern, future-ready digital solutions that push boundaries.</p>
+</div>
+<div class="bg-white p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-outline-variant/10 relative overflow-hidden group hover:shadow-xl transition-all">
+<div class="text-sm font-bold text-outline-variant mb-6">03</div>
+<div class="w-12 h-12 rounded-full bg-tertiary/5 flex items-center justify-center mb-6 absolute top-6 right-6 group-hover:bg-tertiary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Excellence</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We focus on high-quality execution and performance in everything we do.</p>
+</div>
+<div class="bg-white p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-outline-variant/10 relative overflow-hidden group hover:shadow-xl transition-all">
+<div class="text-sm font-bold text-outline-variant mb-6">04</div>
+<div class="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center mb-6 absolute top-6 right-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+<span class="material-symbols-outlined text-2xl">forum</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Communication</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Clear, transparent, and consistent communication with every partner.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Grid (Updated with clickability) -->
+<section class="py-24 bg-background">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-16 space-y-4">
+<h2 class="text-4xl font-headline font-bold text-on-surface">Our Expertise</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto text-lg">Comprehensive digital services designed to help you dominate your market.</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Website Development -->
+<a class="card-gradient-border p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group" href="/services/web-development">
+<div class="w-12 h-12 rounded-full bg-[#8a94ff]/10 flex items-center justify-center mb-6 group-hover:bg-[#8a94ff] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">code</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Website Development</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Custom-coded, high-performance websites built for scale and speed.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-surface-container-low text-[#8a94ff] font-bold text-xs flex justify-between items-center group-hover:bg-[#8a94ff]/5 transition-colors">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+<!-- WordPress Websites -->
+<a class="card-gradient-border p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group" href="/services/wordpress">
+<div class="w-12 h-12 rounded-full bg-[#8a94ff]/10 flex items-center justify-center mb-6 group-hover:bg-[#8a94ff] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">web</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">WordPress Websites</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Dynamic, manageable, and SEO-friendly WordPress solutions.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-surface-container-low text-[#8a94ff] font-bold text-xs flex justify-between items-center group-hover:bg-[#8a94ff]/5 transition-colors">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+<!-- Ecommerce Development -->
+<a class="card-gradient-border p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group" href="/services/ecommerce">
+<div class="w-12 h-12 rounded-full bg-[#8a94ff]/10 flex items-center justify-center mb-6 group-hover:bg-[#8a94ff] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">shopping_cart</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Ecommerce Development</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Convert visitors into customers with high-conversion stores.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-surface-container-low text-[#8a94ff] font-bold text-xs flex justify-between items-center group-hover:bg-[#8a94ff]/5 transition-colors">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+<!-- Featured Card: Social Media Marketing -->
+<a class="bg-gradient-to-br from-[#8a94ff] to-[#a28aff] p-8 rounded-[2rem] shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start text-white group" href="/services/social-media">
+<div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-2xl text-white">share</span>
+</div>
+<h3 class="text-xl font-headline font-bold mb-3">Social Media Marketing</h3>
+<p class="text-white/80 text-sm leading-relaxed mb-6">Strategic social presence that drives engagement and brand loyalty.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-white text-[#8a94ff] font-bold text-xs flex justify-between items-center">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+<!-- Google Ads -->
+<a class="card-gradient-border p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group" href="/services/google-ads">
+<div class="w-12 h-12 rounded-full bg-[#8a94ff]/10 flex items-center justify-center mb-6 group-hover:bg-[#8a94ff] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">ads_click</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Google Ads</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Targeted PPC campaigns that deliver instant ROI and quality leads.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-surface-container-low text-[#8a94ff] font-bold text-xs flex justify-between items-center group-hover:bg-[#8a94ff]/5 transition-colors">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+<!-- SEO -->
+<a class="card-gradient-border p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group" href="/services/seo">
+<div class="w-12 h-12 rounded-full bg-[#8a94ff]/10 flex items-center justify-center mb-6 group-hover:bg-[#8a94ff] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">search</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">SEO</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Rank higher and dominate search results with our expert SEO.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-surface-container-low text-[#8a94ff] font-bold text-xs flex justify-between items-center group-hover:bg-[#8a94ff]/5 transition-colors">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+<!-- Content Writing -->
+<a class="card-gradient-border p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group" href="/services/content-writing">
+<div class="w-12 h-12 rounded-full bg-[#8a94ff]/10 flex items-center justify-center mb-6 group-hover:bg-[#8a94ff] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">edit_note</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Content Writing</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Persuasive copy that speaks your brand voice and converts.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-surface-container-low text-[#8a94ff] font-bold text-xs flex justify-between items-center group-hover:bg-[#8a94ff]/5 transition-colors">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+<!-- Creative Designing -->
+<a class="card-gradient-border p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group" href="/services/creative-designing">
+<div class="w-12 h-12 rounded-full bg-[#8a94ff]/10 flex items-center justify-center mb-6 group-hover:bg-[#8a94ff] group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">palette</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Creative Designing</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Visual identities and UI/UX that leave a lasting impression.</p>
+<div class="mt-auto w-full py-3 px-4 rounded-xl bg-surface-container-low text-[#8a94ff] font-bold text-xs flex justify-between items-center group-hover:bg-[#8a94ff]/5 transition-colors">
+                    Learn More <span class="material-symbols-outlined text-base">arrow_circle_right</span>
+</div>
+</a>
+</div>
+<div class="mt-16 text-center">
+<button class="bg-[#8a94ff] text-white px-10 py-4 rounded-full font-headline font-bold text-lg hover:scale-105 transition-transform flex items-center gap-3 mx-auto shadow-lg shadow-[#8a94ff]/20">
+                See All Services <span class="material-symbols-outlined">arrow_circle_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Portfolio Section (Updated with clickability) -->
+<section class="py-24 bg-surface-container-low/20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="space-y-4">
+<h2 class="text-4xl md:text-5xl font-headline font-bold text-on-surface leading-tight">Featured Projects</h2>
+<p class="text-on-surface-variant max-w-xl text-lg">A showcase of the digital experiences we've sculpted for our forward-thinking partners.</p>
+</div>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-full font-headline font-bold text-lg hover:bg-surface-container-highest transition-all flex items-center gap-2">
+                View All Works <span class="material-symbols-outlined">north_east</span>
+</button>
+</div>
+<div class="grid md:grid-cols-2 gap-12">
+<!-- Portfolio Card 1 -->
+<a class="group cursor-pointer block" href="/portfolio/nexus-analytics">
+<div class="relative aspect-[16/10] rounded-[2rem] overflow-hidden mb-6 bg-surface-container">
+<img alt="Nexus Finance Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Clean financial analytics dashboard interface on a laptop screen with elegant blue and white styling and sleek charts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGAGUS1aXctECCML71nX_fryJ36fWglWzw6zNQZ5s-D6_hzU5J0L3P2iEDJ03oRp0e-do4b4MC5pGUjM7AcVCFoVNe4Etdg5KPUOrc4emzPz1wDU0oAvv8IuzY5hwRI5QDHOtlaUZvmF-tJLzVOGj0cwYsxjZB8Bklc0TeI3-tIicP0kTElzvGE8MzHdwIiAjP5dhgy99U3y-Iti2GUitkCIiJtGFy1vHpxdfW-PC5Y-NuhcNSqtFmdIt4w3jXUsTm-s0OaSFHUw"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white text-primary px-8 py-4 rounded-full font-headline font-bold shadow-2xl">
+                            View Project
+                        </div>
+</div>
+</div>
+<div class="space-y-2 px-4">
+<div class="text-primary font-bold text-xs uppercase tracking-widest">Fintech • SaaS</div>
+<h3 class="text-2xl font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Nexus Analytics Platform</h3>
+<p class="text-on-surface-variant line-clamp-2">A comprehensive data visualization dashboard designed to simplify complex financial forecasting for enterprise teams.</p>
+</div>
+</a>
+<!-- Portfolio Card 2 -->
+<a class="group cursor-pointer block translate-y-0 lg:translate-y-12" href="/portfolio/lumina-tech">
+<div class="relative aspect-[16/10] rounded-[2rem] overflow-hidden mb-6 bg-surface-container">
+<img alt="Lumina Tech Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Modern corporate technology website hero section featuring futuristic abstract 3D elements and clean typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2WRsbd2MzVFJf87u6vRQBUAiMnZH_THs2miJxnFapnTqt8uIaPDGb3lSaLugl2a6e-FJpX31CG47lrHipDhtV9Pht12ChHnl7BlJLkDGEkq0WmX14LFi6nuaOxuHyeYSCuLAbVu9FjNYLRnibcYNBdtOFUo4ZAmIoJ5nec_c-TwWRbPy79gt5MZdLLiDAQA4XmxiZA5MBtOC_ZXYnxhxK_yfA-qNXo8NXoL2ZSNiBYVJrH2EKDVYLqSv8w1CaWw5gGYTveNIK7w"/>
+<div class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<div class="bg-white text-secondary px-8 py-4 rounded-full font-headline font-bold shadow-2xl">
+                            View Project
+                        </div>
+</div>
+</div>
+<div class="space-y-2 px-4">
+<div class="text-secondary font-bold text-xs uppercase tracking-widest">Web Dev • Creative</div>
+<h3 class="text-2xl font-headline font-bold text-on-surface group-hover:text-secondary transition-colors">Lumina Smart Solutions</h3>
+<p class="text-on-surface-variant line-clamp-2">High-performance corporate website with bespoke animations and interactive 3D product showcases.</p>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="py-24 relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-8">
+<div class="bg-primary rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary/20">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-tertiary-container/20 rounded-full blur-3xl -ml-32 -mb-32"></div>
+<div class="relative z-10 max-w-3xl mx-auto space-y-8">
+<h2 class="text-4xl md:text-6xl font-headline font-extrabold text-on-primary leading-tight">
+                    Ready to grow your business with StackMinds?
+                </h2>
+<p class="text-xl text-primary-container font-medium">
+                    Join over 50+ businesses that have scaled their digital footprint with our expert team. Let's build something extraordinary together.
+                </p>
+<div class="pt-8">
+<button class="bg-surface-container-lowest text-primary px-10 py-5 rounded-full font-headline font-bold text-xl hover:scale-105 transition-transform shadow-xl">
+                        Start Your Project
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer (Updated with shared component structure) -->
+<footer class="bg-[#f2f3ff] dark:bg-slate-950 w-full rounded-t-[1.5rem] py-20 px-12">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
+<div class="space-y-8">
+<div class="text-xl font-bold text-[#623fde] font-headline">
+                StackMinds
+            </div>
+<p class="font-['Manrope'] text-sm text-[#213156]/80 leading-relaxed">
+                We build high-performance digital experiences that help your business scale faster.
+            </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-[#623fde]/10 flex items-center justify-center text-[#623fde] hover:bg-[#623fde] hover:text-white transition-all duration-200" href="#"><span class="material-symbols-outlined text-sm">public</span></a>
+<a class="w-10 h-10 rounded-full bg-[#623fde]/10 flex items-center justify-center text-[#623fde] hover:bg-[#623fde] hover:text-white transition-all duration-200" href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
+<a class="w-10 h-10 rounded-full bg-[#623fde]/10 flex items-center justify-center text-[#623fde] hover:bg-[#623fde] hover:text-white transition-all duration-200" href="#"><span class="material-symbols-outlined text-sm">link</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-bold font-headline text-[#213156] dark:text-white mb-8">Quick Links</h4>
+<ul class="space-y-4 font-['Manrope'] text-sm">
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Home</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Services</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Portfolio</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold font-headline text-[#213156] dark:text-white mb-8">Services</h4>
+<ul class="space-y-4 font-['Manrope'] text-sm">
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/web-development">Website Development</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/wordpress">WordPress Websites</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/social-media">Social Media Marketing</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/seo">SEO Services</a></li>
+</ul>
+</div>
+<div class="space-y-8">
+<h4 class="text-lg font-bold font-headline text-[#213156] dark:text-white mb-8">Newsletter</h4>
+<p class="font-['Manrope'] text-sm text-[#213156]/80">Stay updated with our latest digital strategies and insights.</p>
+<div class="relative">
+<input class="w-full bg-white/50 dark:bg-slate-900 border border-outline-variant/20 rounded-full py-4 px-6 text-sm focus:outline-none focus:ring-2 focus:ring-[#623fde] placeholder:text-[#213156]/30" placeholder="Enter your email" type="email"/>
+<button class="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-[#623fde] text-white rounded-full font-bold text-xs flex items-center gap-2 hover:bg-[#5232c9] transition-colors">
+                    Subscribe <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#213156]/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="font-['Manrope'] text-sm text-[#213156]/60">© 2024 StackMinds. Ethereal Architects of Digital Environments.</p>
+<div class="flex gap-8 text-sm text-[#213156]/60">
+<a class="hover:text-[#623fde] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#623fde] transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

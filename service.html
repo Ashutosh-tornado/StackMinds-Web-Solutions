@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#8ae0ff",
+                    "surface-tint": "#623fde",
+                    "surface-container-high": "#e2e7ff",
+                    "tertiary": "#006d45",
+                    "outline-variant": "#a2b1dd",
+                    "on-surface": "#213156",
+                    "primary-dim": "#552fd2",
+                    "outline": "#6a7aa3",
+                    "primary": "#623fde",
+                    "on-secondary-container": "#00596f",
+                    "error": "#ac3149",
+                    "surface-container-highest": "#d9e2ff",
+                    "surface-dim": "#cdd9ff",
+                    "primary-fixed-dim": "#b7a8ff",
+                    "tertiary-dim": "#00603c",
+                    "surface": "#faf8ff",
+                    "secondary-dim": "#005b70",
+                    "on-secondary-fixed-variant": "#00647b",
+                    "tertiary-fixed": "#1dfba5",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#b7eaff",
+                    "inverse-on-surface": "#959cb5",
+                    "tertiary-container": "#1dfba5",
+                    "surface-container-low": "#f2f3ff",
+                    "error-container": "#f76a80",
+                    "on-primary-container": "#3e00ba",
+                    "on-primary": "#fcf7ff",
+                    "secondary-fixed": "#b7eaff",
+                    "inverse-primary": "#947dff",
+                    "secondary": "#006880",
+                    "background": "#faf8ff",
+                    "primary-container": "#c5b8ff",
+                    "on-tertiary-container": "#005a38",
+                    "surface-variant": "#d9e2ff",
+                    "surface-container": "#eaedff",
+                    "on-secondary": "#f1faff",
+                    "inverse-surface": "#060e20",
+                    "on-primary-fixed": "#290082",
+                    "on-tertiary-fixed-variant": "#00653f",
+                    "tertiary-fixed-dim": "#00ec9a",
+                    "error-dim": "#770326",
+                    "on-secondary-fixed": "#004657",
+                    "primary-fixed": "#c5b8ff",
+                    "on-error": "#fff7f7",
+                    "on-background": "#213156",
+                    "on-tertiary-fixed": "#00452a",
+                    "on-surface-variant": "#4f5e86",
+                    "on-error-container": "#68001f",
+                    "on-primary-fixed-variant": "#4718c4",
+                    "surface-bright": "#faf8ff",
+                    "on-tertiary": "#e7ffed"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-[0_20px_40px_rgba(33,49,86,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<span class="text-2xl font-black text-[#213156] dark:text-white tracking-tighter">StackMinds</span>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-headline font-bold text-sm tracking-tight text-[#213156]/70 hover:text-[#623fde] transition-colors duration-300" href="#">Home</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#623fde] border-b-2 border-[#623fde] pb-1" href="#">Services</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#213156]/70 hover:text-[#623fde] transition-colors duration-300" href="#">Portfolio</a>
+<a class="font-headline font-bold text-sm tracking-tight text-[#213156]/70 hover:text-[#623fde] transition-colors duration-300" href="#">Contact</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-dim text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm hover:scale-95 transition-transform duration-200 shadow-lg shadow-primary/20">
+                Get Started
+            </button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-8 pt-20 pb-32 overflow-hidden">
+<div class="absolute top-0 right-0 -z-10 opacity-20 transform translate-x-1/4 -translate-y-1/4">
+<div class="w-[600px] h-[600px] rounded-full bg-primary-container blur-[120px]"></div>
+</div>
+<div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container font-headline font-bold text-xs tracking-widest uppercase">
+<span class="material-symbols-outlined text-sm">code</span>
+                        Core Expertise
+                    </div>
+<h1 class="text-6xl md:text-7xl font-headline font-extrabold text-on-surface leading-[1.1] tracking-tight">
+                        Website <br/><span class="text-primary">Development</span>
+</h1>
+<p class="text-xl text-on-surface-variant leading-relaxed max-w-xl">
+                        We sculpt digital environments using high-performance custom coding. Our Ethereal Architects build more than just websites; we create weightless, immersive experiences that scale.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-headline font-bold text-base hover:shadow-xl hover:shadow-primary/30 transition-all">
+                            Start Project
+                        </button>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-full font-headline font-bold text-base hover:bg-surface-container-highest transition-all">
+                            View Portfolio
+                        </button>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-xl bg-surface-container-low overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="Modern minimalist workspace with high-end computer showing clean code and abstract purple UI design elements on screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1dDFwG65_J1jk9rx4kuzBRX1qq44ij5CULIIFoMvZN10YLyVDR2C8qzKUI6jUFK_t8G-UXE0WjT90hLO7JLBfjstntn8y4tbMGa17_8JFFTLVk8VbL4eGF-xh0SffjIztxevECYyxMYozSAj7x5ataM5cVbtAKLjycacqYE4maUXbqHj1uChOH9Bfjrri8msVlD-P96JPo8G_N3phXuks7pfMHbUknhggds4_8r7Z-_4fc5vtlLrI8j3g-ZjdP0PeDZnS9DZcmw"/>
+</div>
+<!-- Floating Tile -->
+<div class="absolute -bottom-8 -left-8 glass-nav p-6 rounded-xl shadow-2xl border border-white/20 max-w-[240px]">
+<span class="text-primary font-headline font-black text-4xl block mb-1">99.9%</span>
+<span class="text-on-surface-variant font-label text-sm font-semibold uppercase tracking-wider">Performance Score</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 1: What We Offer -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div class="max-w-2xl">
+<h2 class="text-4xl font-headline font-extrabold text-on-surface mb-6">What We Offer</h2>
+<p class="text-on-surface-variant text-lg">Every line of code is written with surgical precision to ensure your digital presence is not only beautiful but architecturally sound.</p>
+</div>
+<div class="hidden md:block">
+<span class="material-symbols-outlined text-primary-container text-8xl opacity-50">layers</span>
+</div>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Feature Cards -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_10px_30px_rgba(33,49,86,0.04)] hover:scale-[1.02] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-4">Custom coding</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Tailor-made solutions built from the ground up without bloated templates or restrictive frameworks.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_10px_30px_rgba(33,49,86,0.04)] hover:scale-[1.02] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined">devices</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-4">Responsive design</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Fluid layouts that adapt seamlessly to every screen size, ensuring a premium experience on mobile and desktop.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_10px_30px_rgba(33,49,86,0.04)] hover:scale-[1.02] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary mb-6 group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined">api</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-4">API integration</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Connecting your digital ecosystem with robust, secure, and efficient third-party service bridges.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_10px_30px_rgba(33,49,86,0.04)] hover:scale-[1.02] transition-all group">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-4">Performance optimization</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Lightning-fast load times and core web vitals that propel your site to the top of search results.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Why Choose StackMinds -->
+<section class="py-24 overflow-hidden">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-4">
+<img class="w-full aspect-[4/5] object-cover rounded-xl shadow-lg" data-alt="Diverse creative team collaborating in a bright modern studio space with mood boards and laptops" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLYqzw1PrbPqV0yqqG5B8W-NZPMwJ8NyM6h2WYzMz3LmfMmXk_u8LMW7HbOli9n9pS5_oPcaS7dyCUPW6IRvgaFsQ4wfnZZ0XTvwurYrxFRY1yhwE-UlfijIh2W74dHVcYn0IHdpLGYeTW0dBMGU1DpYkoZW7-UQz7IDtGkj72eOSKgO4kyE8Lo3JcAnR-HMGPf8rypEQ67-Wvyzth_NMp1XSvi2cDCU69AJGuIRICPtdmSePABUxEYsAlQQN3B98vCevXQEXjrg"/>
+<div class="bg-primary p-8 rounded-xl text-on-primary">
+<span class="font-headline font-black text-5xl">10+</span>
+<p class="font-label text-sm uppercase tracking-widest mt-2">Years Excellence</p>
+</div>
+</div>
+<div class="space-y-4 pt-12">
+<div class="bg-surface-container-highest p-8 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">verified</span>
+<p class="font-headline font-bold text-lg text-on-surface">Premium Standards</p>
+</div>
+<img class="w-full aspect-square object-cover rounded-xl shadow-lg" data-alt="Close-up of hands typing on a high-end laptop with soft morning light illuminating the desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC22-goRZWTjh2J-g_-xueTGwjwYH8v4Tl_nuCGXS3MQk3A1e3QaQq1zqAMkDhJMlWGORHxFek4NZst4PYdiAyL-pfCSdgKC5sAuUjoLTtvz3x-cpadGppIcysKkj5V0KEVvaVaXDqvHEJwgELvlHJkRVANuQVAbtYuRn_qsEv9i557ktzInFw_E6KK_zX1ZW20HtvLFNVUhKRSewDT4X2fzNtjo1rZ0sDl5t1yNftIc1VM21P1g7-g7DI0lWJWqQOmAA8c9oYJWQ"/>
+</div>
+</div>
+<div class="space-y-8">
+<h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface tracking-tight">Why Choose <span class="text-primary">StackMinds</span></h2>
+<div class="space-y-12">
+<div class="flex gap-6">
+<div class="shrink-0 w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-xl mb-2">Deep Tech Expertise</h4>
+<p class="text-on-surface-variant leading-relaxed">Our architects are masters of the modern stack, ensuring your platform is built on stable, future-proof foundations.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="shrink-0 w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-xl mb-2">Conversion Focus</h4>
+<p class="text-on-surface-variant leading-relaxed">We don't just build pages; we build conversion engines. Every element is strategically placed to guide users to action.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="shrink-0 w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">diamond</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-xl mb-2">Premium Quality</h4>
+<p class="text-on-surface-variant leading-relaxed">Meticulous attention to detail and high-end editorial aesthetics that elevate your brand's digital identity.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Our Process -->
+<section class="py-24 bg-background">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center max-w-3xl mx-auto mb-20">
+<h2 class="text-4xl font-headline font-extrabold text-on-surface mb-6">Our Process</h2>
+<p class="text-on-surface-variant text-lg">A systematic approach to creating digital excellence, from initial concept to high-performance launch.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-12 relative">
+<!-- Connector line -->
+<div class="hidden md:block absolute top-24 left-0 w-full h-px bg-outline-variant/30 -z-10"></div>
+<!-- Step 01 -->
+<div class="relative flex flex-col items-center text-center group">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-xl flex items-center justify-center text-primary font-headline font-black text-2xl mb-8 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            01
+                        </div>
+<h3 class="font-headline font-extrabold text-2xl mb-4">Strategy &amp; Research</h3>
+<p class="text-on-surface-variant leading-relaxed">We dive deep into your business goals and user needs to build a roadmap for success.</p>
+</div>
+<!-- Step 02 -->
+<div class="relative flex flex-col items-center text-center group">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-xl flex items-center justify-center text-primary font-headline font-black text-2xl mb-8 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            02
+                        </div>
+<h3 class="font-headline font-extrabold text-2xl mb-4">Design &amp; Development</h3>
+<p class="text-on-surface-variant leading-relaxed">Where the ethereal becomes reality. We sculpt the UI and engineer the engine with precision code.</p>
+</div>
+<!-- Step 03 -->
+<div class="relative flex flex-col items-center text-center group">
+<div class="w-20 h-20 rounded-full bg-surface-container-lowest shadow-xl flex items-center justify-center text-primary font-headline font-black text-2xl mb-8 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
+                            03
+                        </div>
+<h3 class="font-headline font-extrabold text-2xl mb-4">Launch &amp; Optimization</h3>
+<p class="text-on-surface-variant leading-relaxed">The final ascent. We deploy and continuously refine for peak performance and maximum impact.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Final CTA -->
+<section class="px-8 py-24">
+<div class="max-w-5xl mx-auto rounded-xl bg-gradient-to-br from-primary to-primary-dim p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary/20">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[30rem] absolute -top-40 -left-20">rocket_launch</span>
+</div>
+<div class="relative z-10 space-y-8">
+<h2 class="text-4xl md:text-6xl font-headline font-extrabold text-on-primary tracking-tight">Ready to start <br/>your project?</h2>
+<p class="text-on-primary/80 text-xl max-w-2xl mx-auto font-body">
+                        Let's collaborate to build a digital environment that defines your brand's future.
+                    </p>
+<div class="pt-4">
+<button class="bg-on-primary text-primary px-10 py-5 rounded-full font-headline font-extrabold text-lg hover:scale-105 transition-transform shadow-xl">
+                            Get a Custom Quote
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full rounded-t-[1.5rem] bg-[#f2f3ff] dark:bg-slate-950">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-12 py-16 w-full max-w-7xl mx-auto">
+<div class="col-span-2 md:col-span-1">
+<span class="text-xl font-bold text-[#623fde] block mb-4">StackMinds</span>
+<p class="font-['Manrope'] text-sm text-[#213156]/80 leading-relaxed">
+                    Ethereal Architects of Digital Environments. Sculpting the future of the web.
+                </p>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline font-bold text-on-surface text-sm uppercase tracking-widest">Services</h4>
+<ul class="space-y-2">
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Website Development</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">WordPress Websites</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Ecommerce Development</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">SEO</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline font-bold text-on-surface text-sm uppercase tracking-widest">Marketing</h4>
+<ul class="space-y-2">
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Social Media Marketing</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Google Ads</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Content Writing</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Creative Designing</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline font-bold text-on-surface text-sm uppercase tracking-widest">Legal</h4>
+<ul class="space-y-2">
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Privacy Policy</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] font-['Manrope'] text-sm transition-all duration-200 underline-offset-4 hover:underline decoration-[#623fde]/30" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-[#213156]/5 py-8 text-center">
+<p class="font-['Manrope'] text-sm text-[#213156]/40">© 2024 StackMinds. Ethereal Architects of Digital Environments.</p>
+</div>
+</footer>
+</body></html>
