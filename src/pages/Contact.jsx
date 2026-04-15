@@ -51,7 +51,7 @@ export default function Contact() {
                 <div>
                   <div className="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Email Us</div>
                   <a href="mailto:stackmindswebsolutions@gmail.com" className="text-xl font-headline font-bold text-on-surface hover:text-primary transition-colors">
-                    stackmindswebsolutions@gmail.com
+                    info@stackminds.in
                   </a>
                 </div>
               </div>
