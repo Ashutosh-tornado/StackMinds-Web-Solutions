@@ -7,12 +7,36 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# Dependencies
+node_modules/
+
+# Build
 dist
 dist-ssr
+build
+
+# Env files
+.env
+.env.*
+!.env.example
 *.local
 
-# Editor directories and files
+# Runtime
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage
+*.lcov
+.nyc_output
+
+# Cache
+.cache
+.parcel-cache
+
+# Editor files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -23,4 +47,13 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
+# Misc
+*.tgz
+.yarn-integrity
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
