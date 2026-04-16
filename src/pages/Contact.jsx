@@ -12,44 +12,45 @@ export default function Contact() {
     setTimeout(() => setToast({ ...toast, show: false }), 4000);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submission triggered');
+ const handleSubmit = (e) => {
+  e.preventDefault();
 
-    // Basic validation
-    const formData = new FormData(formRef.current);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
+  const formData = new FormData(formRef.current);
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const message = formData.get('message');
+  const phone = formData.get('phone');
 
-    if (!name || !email || !message) {
-      showToast('Please fill in all required fields.', 'error');
-      return;
-    }
+  if (!name || !email || !message) {
+    showToast('Please fill in all required fields.', 'error');
+    return;
+  }
 
-    // Safeguard EmailJS environment variables
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    if (serviceId && templateId && publicKey) {
-      emailjs
-        .sendForm(serviceId, templateId, formRef.current, { publicKey })
-        .then(() => {
-          showToast('Message sent successfully!', 'success');
-          formRef.current.reset();
-        })
-        .catch((error) => {
-          console.error('EmailJS Error:', error);
-          showToast('Something went wrong. Please try again.', 'error');
-        });
-    } else {
-      // Fallback for development or missing configuration
-      console.warn('EmailJS not configured. Form data:', Object.fromEntries(formData));
-      showToast('Form submitted! (Service not configured locally)', 'success');
+  if (!serviceId || !templateId || !publicKey) {
+    showToast("Configuration error. Please try again later.", "error");
+    return;
+  }
+
+  emailjs
+    .send(serviceId, templateId, {
+      name,
+      email,
+      phone,
+      message
+    }, publicKey)
+    .then(() => {
+      showToast('Message sent successfully!', 'success');
       formRef.current.reset();
-    }
-  };
+    })
+    .catch((error) => {
+      console.error('EmailJS Error:', error);
+      showToast('Something went wrong. Please try again.', 'error');
+    });
+};
 
   return (
     <>
