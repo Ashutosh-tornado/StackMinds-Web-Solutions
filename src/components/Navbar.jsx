@@ -1,104 +1,339 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+
+/* ─── Magnetic nav link with animated underline ─── */
+function NavLink({ to, children, active }) {
+  return (
+    <Link
+      to={to}
+      className="relative group flex flex-col items-center"
+      style={{ color: active ? '#623fde' : 'rgba(33,49,86,0.65)', fontWeight: 700, fontSize: '0.875rem', letterSpacing: '-0.01em', transition: 'color 0.2s ease' }}
+      onMouseEnter={e => { if (!active) e.currentTarget.style.color = '#623fde'; }}
+      onMouseLeave={e => { if (!active) e.currentTarget.style.color = 'rgba(33,49,86,0.65)'; }}
+    >
+      {children}
+      {/* Animated underline */}
+      <span
+        style={{
+          position: 'absolute', bottom: -3, left: 0, right: 0, height: 2,
+          background: 'linear-gradient(90deg, #623fde, #8b77ff)',
+          borderRadius: 2,
+          transform: active ? 'scaleX(1)' : 'scaleX(0)',
+          transformOrigin: 'left',
+          transition: 'transform 0.28s cubic-bezier(0.22,1,0.36,1)',
+        }}
+        className="group-hover:scale-x-100"
+      />
+    </Link>
+  );
+}
+
+/* ─── Services dropdown link ─── */
+function DropdownLink({ to, children }) {
+  return (
+    <Link
+      to={to}
+      className="block px-5 py-2.5 text-sm font-semibold transition-all duration-200 rounded-lg mx-1"
+      style={{ color: 'rgba(33,49,86,0.72)' }}
+      onMouseEnter={e => { e.currentTarget.style.color = '#623fde'; e.currentTarget.style.background = 'rgba(98,63,222,0.06)'; }}
+      onMouseLeave={e => { e.currentTarget.style.color = 'rgba(33,49,86,0.72)'; e.currentTarget.style.background = 'transparent'; }}
+    >
+      {children}
+    </Link>
+  );
+}
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const dropdownRef = useRef(null);
 
-  // Close menu on navigation
+  /* Track scroll for glassmorphism intensification */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  /* Close mobile menu & dropdown on route change */
   useEffect(() => {
     setIsMenuOpen(false);
+    setServicesOpen(false);
   }, [location]);
 
-  // Disable body scroll when menu is open
+  /* Body scroll lock */
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [isMenuOpen]);
 
+  /* Close dropdown on outside click */
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setServicesOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const isActive = (path) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+
+  /* Nav items stagger */
+  const navContainer = { hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } } };
+  const navItem = {
+    hidden: { opacity: 0, y: -10 },
+    show:   { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+  };
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#faf8ff]/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(33,49,86,0.06)]">
-      <div className="flex justify-between items-center px-6 sm:px-8 md:px-10 py-4 max-w-7xl mx-auto">
-        <Link to="/" className="text-2xl font-black text-[#213156] dark:text-white tracking-tighter font-headline">
-          StackMinds
-        </Link>
-        <div className="hidden md:flex items-center gap-8 font-['Plus_Jakarta_Sans'] font-bold text-sm tracking-tight">
-          <Link to="/" className={`transition-colors duration-300 ${location.pathname === '/' ? 'text-[#623fde] border-b-2 border-[#623fde] pb-1' : 'text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde]'}`}>Home</Link>
-          <div className="relative group">
-            <Link to="/services" className="flex items-center gap-1 text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300">
-              Services <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
-            </Link>
-            <div className="absolute top-full left-0 pt-6 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-              <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-outline-variant/10 py-4 transform origin-top translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <Link to="/services/web-development" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">Website Development</Link>
-                <Link to="/services/wordpress" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">WordPress Websites</Link>
-                <Link to="/services/ecommerce" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">Ecommerce Development</Link>
-                <Link to="/services/social-media-marketing" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">Social Media Marketing</Link>
-                <Link to="/services/google-ads" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">Google Ads</Link>
-                <Link to="/services/seo" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">SEO</Link>
-                <Link to="/services/content-writing" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">Content Writing</Link>
-                <Link to="/services/creative-designing" className="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors">Creative Designing</Link>
-              </div>
-            </div>
-          </div>
-          <Link to="/portfolio" className="text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300">Portfolio</Link>
-          <Link to="/contact" className="text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300">Contact</Link>
-        </div>
-        <div className="flex items-center gap-4">
-          <Link to="/contact" className="hidden md:inline-block bg-[#1e40af] text-[#fcf7ff] px-6 py-2.5 rounded-full font-headline font-bold text-sm scale-95 hover:scale-100 active:opacity-80 transition-all duration-200 ease-in-out hover:shadow-lg">
-            Get Started
-          </Link>
-          
-          {/* Mobile Menu Toggle */}
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-[#213156] dark:text-white hover:bg-black/5 rounded-lg transition-colors z-50"
-            aria-label="Toggle Menu"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity duration-300 ease-in-out md:hidden ${
-          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      />
-
-      {/* Mobile Side Drawer */}
-      <div 
-        className={`fixed top-0 right-0 h-screen w-[80%] max-w-[400px] bg-white dark:bg-slate-900 z-50 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+    <>
+      {/* ═══ MAIN NAV BAR ═══ */}
+      <motion.nav
+        initial={{ y: -72, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          position: 'fixed', top: 0, width: '100%', zIndex: 50,
+          background: scrolled ? 'rgba(250,248,255,0.82)' : 'rgba(250,248,255,0.65)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: scrolled ? '1px solid rgba(98,63,222,0.10)' : '1px solid rgba(98,63,222,0.05)',
+          boxShadow: scrolled ? '0 4px 32px rgba(33,49,86,0.07)' : '0 2px 16px rgba(33,49,86,0.04)',
+          transition: 'background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease',
+          willChange: 'transform',
+        }}
       >
-        <div className="flex flex-col h-full p-8 pt-24 overflow-y-auto">
-          <nav className="flex flex-col space-y-8 font-['Plus_Jakarta_Sans'] font-bold text-xl tracking-tight">
-            <Link to="/" className={`${location.pathname === '/' ? 'text-[#623fde]' : 'text-[#213156]/70 dark:text-slate-300'}`}>Home</Link>
-            <Link to="/services" className={`${location.pathname.startsWith('/services') ? 'text-[#623fde]' : 'text-[#213156]/70 dark:text-slate-300'}`}>Services</Link>
-            <Link to="/portfolio" className={`${location.pathname === '/portfolio' ? 'text-[#623fde]' : 'text-[#213156]/70 dark:text-slate-300'}`}>Portfolio</Link>
-            <Link to="/contact" className={`${location.pathname === '/contact' ? 'text-[#623fde]' : 'text-[#213156]/70 dark:text-slate-300'}`}>Contact</Link>
-          </nav>
-
-          <div className="mt-auto pt-10 border-t border-black/5 dark:border-white/5">
-            <Link 
-              to="/contact" 
-              className="block w-full text-center bg-[#1e40af] text-[#fcf7ff] py-4 rounded-xl font-headline font-bold text-lg hover:shadow-xl transition-all active:scale-95"
+        <div className="flex justify-between items-center px-6 sm:px-8 md:px-10 py-4 max-w-7xl mx-auto">
+          
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+          >
+            <Link
+              to="/"
+              className="font-headline font-black tracking-tighter"
+              style={{ fontSize: '1.45rem', color: '#213156', letterSpacing: '-0.04em', lineHeight: 1 }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#623fde'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = '#213156'; }}
             >
-              Get Started
+              Stack<span style={{ color: '#623fde' }}>Minds</span>
             </Link>
+          </motion.div>
+
+          {/* Desktop nav links */}
+          <motion.div
+            variants={navContainer}
+            initial="hidden"
+            animate="show"
+            className="hidden md:flex items-center gap-8"
+            style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+          >
+            <motion.div variants={navItem}>
+              <NavLink to="/" active={isActive('/')}>Home</NavLink>
+            </motion.div>
+
+            {/* Services with dropdown */}
+            <motion.div variants={navItem}>
+              <div ref={dropdownRef} className="relative">
+                <button
+                  onClick={() => setServicesOpen(!servicesOpen)}
+                  className="flex items-center gap-1 font-bold text-sm"
+                  style={{ color: isActive('/services') ? '#623fde' : 'rgba(33,49,86,0.65)', letterSpacing: '-0.01em', background: 'none', border: 'none', cursor: 'pointer', transition: 'color 0.2s ease' }}
+                  onMouseEnter={e => { if (!isActive('/services')) e.currentTarget.style.color = '#623fde'; }}
+                  onMouseLeave={e => { if (!isActive('/services')) e.currentTarget.style.color = 'rgba(33,49,86,0.65)'; }}
+                >
+                  Services
+                  <motion.span animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.22 }}>
+                    <ChevronDown style={{ width: 15, height: 15 }} />
+                  </motion.span>
+                </button>
+                <AnimatePresence>
+                  {servicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                      style={{
+                        position: 'absolute', top: 'calc(100% + 14px)', left: '-12px',
+                        width: 240, zIndex: 60,
+                        background: 'rgba(255,255,255,0.96)',
+                        backdropFilter: 'blur(20px)',
+                        borderRadius: 18,
+                        boxShadow: '0 16px 48px rgba(33,49,86,0.14), 0 1px 0 rgba(255,255,255,0.9) inset',
+                        border: '1px solid rgba(98,63,222,0.10)',
+                        padding: '10px 0',
+                        transformOrigin: 'top left',
+                      }}
+                    >
+                      {[
+                        ['Web Development', '/services/web-development'],
+                        ['WordPress Websites', '/services/wordpress'],
+                        ['Ecommerce', '/services/ecommerce'],
+                        ['Social Media Marketing', '/services/social-media-marketing'],
+                        ['Google Ads', '/services/google-ads'],
+                        ['SEO', '/services/seo'],
+                        ['Content Writing', '/services/content-writing'],
+                        ['Creative Designing', '/services/creative-designing'],
+                      ].map(([label, path], i) => (
+                        <DropdownLink key={i} to={path}>{label}</DropdownLink>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+
+            <motion.div variants={navItem}>
+              <NavLink to="/portfolio" active={isActive('/portfolio')}>Portfolio</NavLink>
+            </motion.div>
+            <motion.div variants={navItem}>
+              <NavLink to="/contact" active={isActive('/contact')}>Contact</NavLink>
+            </motion.div>
+          </motion.div>
+
+          {/* CTA + Hamburger */}
+          <div className="flex items-center gap-4">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
+              className="hidden md:block"
+            >
+              <Link
+                to="/contact"
+                className="group relative inline-flex items-center gap-2 font-headline font-bold text-sm rounded-full overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #623fde, #8b77ff)',
+                  color: '#fff',
+                  padding: '10px 22px',
+                  boxShadow: '0 4px 18px rgba(98,63,222,0.28)',
+                  transition: 'transform 0.22s ease, box-shadow 0.22s ease',
+                  letterSpacing: '-0.01em',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(98,63,222,0.38)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 18px rgba(98,63,222,0.28)'; }}
+              >
+                {/* shimmer */}
+                <span
+                  className="absolute inset-0 -skew-x-12 translate-x-[-110%] group-hover:translate-x-[110%] transition-transform duration-600"
+                  style={{ background: 'linear-gradient(90deg,transparent,rgba(255,255,255,0.22),transparent)', transitionDuration: '600ms' }}
+                />
+                Get Started
+                <ArrowRight style={{ width: 14, height: 14, transition: 'transform 0.2s ease' }} className="group-hover:translate-x-0.5" />
+              </Link>
+            </motion.div>
+
+            {/* Hamburger */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 rounded-xl"
+              style={{ color: '#213156', background: 'transparent', border: 'none', cursor: 'pointer', transition: 'background 0.18s ease' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(98,63,222,0.07)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+              aria-label="Toggle Menu"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {isMenuOpen
+                  ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }}><X style={{ width: 22, height: 22 }} /></motion.span>
+                  : <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.18 }}><Menu style={{ width: 22, height: 22 }} /></motion.span>
+                }
+              </AnimatePresence>
+            </motion.button>
           </div>
         </div>
-      </div>
-    </nav>
+      </motion.nav>
+
+      {/* ═══ MOBILE OVERLAY ═══ */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(15,15,30,0.35)', backdropFilter: 'blur(4px)', zIndex: 40 }}
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* ═══ MOBILE DRAWER ═══ */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            key="drawer"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              position: 'fixed', top: 0, right: 0, bottom: 0,
+              width: '80%', maxWidth: 380, zIndex: 50,
+              background: 'rgba(250,248,255,0.97)',
+              backdropFilter: 'blur(24px)',
+              borderLeft: '1px solid rgba(98,63,222,0.10)',
+              boxShadow: '-16px 0 48px rgba(33,49,86,0.12)',
+              willChange: 'transform',
+            }}
+          >
+            <div className="flex flex-col h-full overflow-y-auto" style={{ paddingTop: '5rem', paddingBottom: '2.5rem', paddingLeft: '2rem', paddingRight: '2rem' }}>
+              <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', fontFamily: '"Plus Jakarta Sans", sans-serif', fontWeight: 700, fontSize: '1.2rem' }}>
+                {[
+                  ['Home', '/'],
+                  ['Services', '/services'],
+                  ['Portfolio', '/portfolio'],
+                  ['Contact', '/contact'],
+                ].map(([label, path], i) => (
+                  <motion.div
+                    key={label}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.07 + i * 0.06, duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <Link
+                      to={path}
+                      style={{ color: isActive(path) ? '#623fde' : 'rgba(33,49,86,0.7)', letterSpacing: '-0.02em' }}
+                    >
+                      {label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.32, duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                style={{ marginTop: 'auto', paddingTop: '2.5rem', borderTop: '1px solid rgba(98,63,222,0.08)' }}
+              >
+                <Link
+                  to="/contact"
+                  style={{
+                    display: 'block', textAlign: 'center', width: '100%',
+                    background: 'linear-gradient(135deg, #623fde, #8b77ff)',
+                    color: '#fff', padding: '16px', borderRadius: 16,
+                    fontFamily: '"Plus Jakarta Sans", sans-serif', fontWeight: 800,
+                    fontSize: '1.05rem', letterSpacing: '-0.01em',
+                    boxShadow: '0 8px 28px rgba(98,63,222,0.30)',
+                  }}
+                >
+                  Get Started Free
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
