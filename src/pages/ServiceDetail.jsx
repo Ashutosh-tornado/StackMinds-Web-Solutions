@@ -11,40 +11,41 @@ export default function ServiceDetail() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative px-8 pt-20 pb-32 overflow-hidden">
-        <div className="absolute top-0 right-0 -z-10 opacity-20 transform translate-x-1/4 -translate-y-1/4">
+      <section className="relative px-4 sm:px-6 md:px-10 pt-20 pb-32 overflow-hidden">
+        <div className="absolute top-0 right-0 -z-10 opacity-20 transform translate-x-1/4 -translate-y-1/4 pointer-events-none select-none">
           <div className="w-[600px] h-[600px] rounded-full bg-primary-container blur-[120px]"></div>
         </div>
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
             <div className="space-y-8">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container font-headline font-bold text-xs tracking-widest uppercase">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container font-headline font-bold text-xs tracking-widest uppercase mb-2">
                     <Icons.Code2 className="w-5 h-5 flex-shrink-0" />
                     Core Expertise
                 </div>
-                <h1 className="text-6xl md:text-7xl font-headline font-extrabold text-on-surface leading-[1.1] tracking-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-headline font-extrabold text-on-surface leading-tight sm:leading-snug tracking-tight break-words">
                     {data.titleLine1} <br/><span className="text-primary">{data.titleLine2}</span>
                 </h1>
                 <p className="text-xl text-on-surface-variant leading-relaxed max-w-xl">
                     {data.heroDesc}
                 </p>
-                <div className="flex flex-wrap gap-4">
-                    <Link to="/contact" className="inline-block bg-primary text-on-primary px-8 py-4 rounded-full font-headline font-bold text-base hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1">
+                <div className="flex flex-wrap gap-4 relative z-20 pointer-events-auto">
+                    <Link to="/contact" className="inline-block bg-primary text-on-primary px-8 py-4 rounded-full font-headline font-bold text-base hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1 relative z-30 pointer-events-auto">
                         Start Project
                     </Link>
-                    <Link to="/portfolio" className="inline-block bg-surface-container-high text-primary px-8 py-4 rounded-full font-headline font-bold text-base hover:bg-surface-container-highest transition-all hover:-translate-y-1">
+                    <Link to="/portfolio" className="inline-block bg-surface-container-high text-primary px-8 py-4 rounded-full font-headline font-bold text-base hover:bg-surface-container-highest transition-all hover:-translate-y-1 relative z-30 pointer-events-auto">
                         View Portfolio
                     </Link>
                 </div>
             </div>
             
-            <div className="relative">
-                <div className="aspect-square rounded-xl bg-surface-container-low overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div className="relative mt-12 md:mt-0">
+                <div className="aspect-square rounded-xl bg-surface-container-low overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500 border border-black/5 dark:border-white/5">
                     <img className="w-full h-full object-cover" src={data.heroImage} alt="Service Visual" />
                 </div>
-                {/* Floating Tile */}
-                <div className="absolute -bottom-8 -left-8 glass p-6 rounded-xl shadow-2xl border border-white/20 max-w-[240px] hover:scale-105 transition-transform duration-300">
-                    <span className="text-primary font-headline font-black text-4xl block mb-1">{data.heroBadgeValue}</span>
-                    <span className="text-on-surface-variant font-label text-sm font-semibold uppercase tracking-wider">{data.heroBadgeText}</span>
+                {/* Floating Performance Card */}
+                <div className="relative -translate-y-6 mx-auto w-[88%] md:w-auto md:translate-y-0 md:absolute md:-bottom-10 md:-left-10 glass p-8 rounded-[2rem] shadow-2xl border border-white/40 md:max-w-[260px] backdrop-blur-3xl hover:scale-105 transition-transform duration-300 z-20">
+                    <div className="absolute inset-0 bg-white/40 dark:bg-black/20 rounded-[2rem] -z-10"></div>
+                    <span className="text-primary font-headline font-black text-4xl block mb-2 leading-none relative z-10">{data.heroBadgeValue}</span>
+                    <span className="text-on-surface-variant font-headline text-xs font-bold uppercase tracking-[0.15em] opacity-80 relative z-10">{data.heroBadgeText}</span>
                 </div>
             </div>
         </div>
