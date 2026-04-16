@@ -34,15 +34,17 @@ export default function ProjectDetail() {
             </p>
           </div>
 
-          <div className="relative rounded-[2rem] overflow-hidden shadow-2xl bg-black">
-            <img 
-                src={data.heroImg} 
-                alt="Project Hero" 
-                className="w-full h-full object-cover aspect-[21/9] md:aspect-[24/10] opacity-90"
-            />
+          <div className="relative">
+            <div className="rounded-[2rem] overflow-hidden shadow-2xl bg-black aspect-[4/3] sm:aspect-[16/9] md:aspect-[24/10]">
+              <img 
+                  src={data.heroImg} 
+                  alt="Project Hero" 
+                  className="w-full h-full object-cover opacity-90"
+              />
+            </div>
             
             {/* Floating Stat Card */}
-            <div className="absolute bottom-6 right-6 md:bottom-12 md:right-12 bg-white/90 backdrop-blur-md p-6 md:px-8 md:py-6 rounded-2xl shadow-xl flex flex-col items-center">
+            <div className="relative mt-8 mx-auto w-[90%] md:w-auto md:mt-0 md:absolute md:bottom-12 md:right-12 bg-white/90 backdrop-blur-md p-6 md:px-8 md:py-6 rounded-2xl shadow-xl flex flex-col items-center border border-white/20 z-20 transition-all duration-300">
               <span className="text-[#623fde] text-4xl md:text-5xl font-headline font-black mb-1">{data.statValue}</span>
               <span className="text-[#213156]/60 text-[10px] font-bold tracking-widest uppercase">{data.statLabel}</span>
             </div>
@@ -155,17 +157,17 @@ export default function ProjectDetail() {
         </section>
 
         {/* CTA SECTION */}
-        <section className="px-8 py-24 max-w-7xl mx-auto">
-          <div className="bg-[#5735c9] rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-[#623fde]/20">
+        <section className="px-6 py-16 md:py-24 max-w-7xl mx-auto">
+          <div className="bg-[#5735c9] rounded-[3rem] p-10 sm:p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-[#623fde]/20">
             {/* Subtle Gradient Backings */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#7c5deb] rounded-full blur-[100px] -mr-32 -mt-32 opacity-80"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#4c2bb5] rounded-full blur-[100px] -ml-32 -mb-32 opacity-80"></div>
             
-            <div className="relative z-10 space-y-10 max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-headline font-bold text-white leading-tight">
+            <div className="relative z-10 space-y-8 md:space-y-10 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-headline font-bold text-white leading-tight">
                 Ready to start a similar project?
               </h2>
-              <p className="text-[#d1c4f9] text-xl">
+              <p className="text-[#d1c4f9] text-lg md:text-xl leading-relaxed max-w-md md:max-w-none mx-auto">
                 Let's collaborate to architect your next digital environment. Our team is ready to translate your vision into a high-performance reality.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
