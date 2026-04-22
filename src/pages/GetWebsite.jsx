@@ -47,6 +47,24 @@ const SERVICES = [
 
 const PRICING = [
   {
+    name: 'Landing Page',
+    price: '₹4,999',
+    desc: 'Best for lead generation & ads',
+    valueLine: 'Best for Ads & Lead Generation',
+    features: [
+      '1 high-converting page',
+      'Mobile-friendly design',
+      'WhatsApp integration',
+      'Basic SEO setup',
+      'Fast delivery (2–3 days)',
+    ],
+    cta: 'Get Started',
+    highlight: false,
+    isEntry: true,
+    badge: 'Best for Ads',
+    badge2: 'Starter Plan',
+  },
+  {
     name: 'Basic',
     price: '₹9,999',
     desc: 'Perfect for freelancers and small businesses getting started online.',
@@ -60,6 +78,7 @@ const PRICING = [
     ],
     cta: 'Get Started',
     highlight: false,
+    isBasic: true,
   },
   {
     name: 'Standard',
@@ -91,6 +110,7 @@ const PRICING = [
     ],
     cta: "Let's Talk",
     highlight: false,
+    isPremium: true,
   },
 ];
 
@@ -322,6 +342,18 @@ function SectionLabel({ children, light = false }) {
 }
 
 export default function GetWebsite() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  useEffect(() => {
+    const check = () => {
+      setIsMobile(window.innerWidth < 640);
+      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024);
+    };
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 40, damping: 25 });
   
@@ -375,9 +407,7 @@ export default function GetWebsite() {
         fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.90)',
         letterSpacing: '.02em',
       }}>
-        🎉 Limited Time — Get Your Business Website Starting at{' '}
-        <span style={{ color: '#c4b5fd', fontWeight: 900 }}>₹9,999</span>
-        {' '}· Local service in Vasai-Virar
+        🔥 Limited Time — Get Your Business Online Starting at ₹4,999 | Local Service in Vasai-Virar
       </div>
 
       {/* Hero */}
@@ -432,7 +462,7 @@ export default function GetWebsite() {
             style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'rgba(0,104,128,0.1)' }}
           />
         </motion.div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 780, margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
           <motion.div variants={container} initial="hidden" animate="show">
             <motion.div variants={fromC} style={{ marginBottom: 'clamp(1.2rem,2.5vw,1.8rem)' }}>
               <span style={{
@@ -451,13 +481,63 @@ export default function GetWebsite() {
               </span>
             </motion.div>
             <motion.div variants={fromC} style={{ marginBottom: 'clamp(1rem,2vw,1.6rem)' }}>
-              <h1 style={{ fontFamily: '"Plus Jakarta Sans",sans-serif', fontSize: 'clamp(2.2rem,7vw,5.2rem)', fontWeight: 900, lineHeight: 1.08, color: '#0d1b3e', letterSpacing: '-0.04em' }}>
-                Get Your Business Website<br />
-                <span style={{ background: 'linear-gradient(135deg,#623fde 0%,#9b7dff 45%,#006880 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Starting at ₹9,999</span>
+              <h1 style={{ fontFamily: '"Plus Jakarta Sans",sans-serif', fontSize: 'clamp(2.2rem,7vw,5.2rem)', fontWeight: 900, lineHeight: 1.1, color: '#0d1b3e', letterSpacing: '-0.04em' }}>
+                Get Your Business Online
+                <motion.span 
+                  animate={{ 
+                    backgroundPosition: ['-200% 0', '200% 0']
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: 'easeInOut' 
+                  }}
+                  style={{ 
+                    display: 'block', 
+                    margin: '0.12em 0', 
+                    fontSize: 'clamp(1.6rem, 4.5vw, 3.2rem)', 
+                    fontWeight: 600,
+                    background: 'linear-gradient(90deg, #623fde 0%, #9b7dff 35%, #fff 50%, #9b7dff 65%, #623fde 100%)',
+                    backgroundSize: '200% auto',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    lineHeight: 1,
+                    fontFamily: '"Plus Jakarta Sans", sans-serif',
+                  }}
+                >
+                  &
+                </motion.span>
+                Start Getting Customers
               </h1>
             </motion.div>
-            <motion.p variants={fromB} style={{ fontSize: 'clamp(1rem,1.8vw,1.15rem)', lineHeight: 1.74, color: 'rgba(33,49,86,0.62)', fontWeight: 500, maxWidth: 560, margin: '0 auto clamp(2rem,3.5vw,2.8rem)' }}>
-              Mobile-friendly, fast, and designed to generate leads. Delivered in <strong style={{ color: '#0d1b3e' }}>3–5 business days</strong> — no hidden costs.
+            <motion.div variants={fromC} style={{ marginBottom: 'clamp(1rem,2vw,1.6rem)' }}>
+              <span style={{ 
+                fontSize: 'clamp(1.4rem,4vw,2.6rem)', 
+                fontWeight: 900, 
+                background: 'linear-gradient(135deg,#623fde 0%,#9b7dff 45%,#006880 100%)', 
+                WebkitBackgroundClip: 'text', 
+                WebkitTextFillColor: 'transparent', 
+                backgroundClip: 'text',
+                letterSpacing: '-0.02em'
+              }}>
+                Starting at Just <motion.span 
+                  animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+                  style={{ 
+                    fontSize: '1.1em', 
+                    background: 'linear-gradient(90deg, #5b3cca, #9b7dff, #623fde, #5b3cca)',
+                    backgroundSize: '300% auto',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    display: 'inline-block'
+                  }}
+                >₹4,999</motion.span>
+              </span>
+            </motion.div>
+            <motion.p variants={fromB} style={{ fontSize: 'clamp(1rem,1.8vw,1.15rem)', lineHeight: 1.74, color: 'rgba(33,49,86,0.62)', fontWeight: 500, maxWidth: 720, margin: '0 auto clamp(2rem,3.5vw,2.8rem)' }}>
+              Mobile-friendly, fast, and designed to generate leads. Delivered in <strong style={{ color: '#0d1b3e' }}>2–5 days</strong> — no hidden costs.
             </motion.p>
             <motion.div variants={fromB} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 14, marginBottom: 'clamp(2rem,4vw,3.5rem)' }}>
               <CallBtn size="lg" label="Call Now" id="hero-call-btn" />
@@ -563,50 +643,154 @@ export default function GetWebsite() {
             <SectionLabel light>Transparent Pricing</SectionLabel>
             <h2 style={{ fontFamily: '"Plus Jakarta Sans",sans-serif', fontSize: 'clamp(1.8rem,4.5vw,3.2rem)', fontWeight: 900, lineHeight: 1.08, color: '#fff', letterSpacing: '-0.03em' }}>Simple, honest pricing.<br className="hidden sm:block" /> No surprises.</h2>
           </Reveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 'clamp(1rem,2vw,1.5rem)', alignItems: 'stretch' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', 
+            gap: 'clamp(1rem,2vw,1.5rem)', 
+            alignItems: 'stretch' 
+          }}>
             {PRICING.map((plan, i) => (
               <Reveal key={i} direction="up" delay={0.10 + i * 0.15} style={{ height: '100%' }}>
                 <motion.div
                   style={{
                     padding: 'clamp(2rem,3vw,2.6rem)', borderRadius: 28,
-                    background: plan.highlight ? 'linear-gradient(135deg,rgba(98,63,222,0.46),rgba(139,119,255,0.28))' : 'rgba(255,255,255,0.04)',
-                    border: plan.highlight ? '1.5px solid rgba(139,119,255,0.65)' : '1px solid rgba(255,255,255,0.08)',
-                    boxShadow: plan.highlight ? '0 0 60px rgba(98,63,222,0.40)' : 'none',
+                    background: plan.highlight 
+                      ? 'linear-gradient(135deg,rgba(98,63,222,0.46),rgba(139,119,255,0.28))' 
+                      : plan.isEntry 
+                        ? 'rgba(251,191,36,0.05)' 
+                        : plan.isPremium
+                          ? 'linear-gradient(165deg,#3b0d0c 0%,#540c0b 100%)'
+                          : 'rgba(255,255,255,0.04)',
+                    border: plan.highlight 
+                      ? '1.5px solid rgba(139,119,255,0.65)' 
+                      : plan.isEntry 
+                        ? '1.5px solid rgba(251,191,36,0.45)' 
+                        : plan.isBasic
+                          ? '1px solid rgba(14,165,233,0.3)'
+                          : plan.isPremium
+                            ? '1px solid rgba(248,244,227,0.15)'
+                            : '1px solid rgba(255,255,255,0.08)',
+                    boxShadow: plan.highlight 
+                      ? '0 0 60px rgba(98,63,222,0.40)' 
+                      : plan.isEntry 
+                        ? '0 0 40px rgba(251,191,36,0.12)' 
+                        : plan.isBasic
+                          ? '0 0 30px rgba(14,165,233,0.12)'
+                          : plan.isPremium
+                            ? '0 0 50px rgba(59,13,12,0.3)'
+                            : 'none',
                     position: 'relative',
                     height: '100%', display: 'flex', flexDirection: 'column'
                   }}
-                  initial={plan.highlight ? { y: -8 } : { y: 0 }}
+                  initial={{ y: 0 }}
                   whileHover={{
-                    y: plan.highlight ? -16 : -8,
-                    boxShadow: plan.highlight ? '0 20px 80px rgba(98,63,222,0.50)' : '0 15px 40px rgba(0,0,0,0.25)',
-                    background: plan.highlight ? 'linear-gradient(135deg,rgba(98,63,222,0.52),rgba(139,119,255,0.34))' : 'rgba(255,255,255,0.07)',
+                    y: -8,
+                    scale: 1.03,
+                    boxShadow: plan.highlight 
+                      ? '0 20px 80px rgba(98,63,222,0.50)' 
+                      : plan.isEntry 
+                        ? '0 20px 60px rgba(251,191,36,0.25)' 
+                        : plan.isBasic
+                          ? '0 20px 60px rgba(14,165,233,0.3)'
+                          : plan.isPremium
+                            ? '0 20px 60px rgba(59,13,12,0.45)'
+                            : '0 15px 40px rgba(0,0,0,0.25)',
+                    background: plan.highlight 
+                      ? 'linear-gradient(135deg,rgba(98,63,222,0.52),rgba(139,119,255,0.34))' 
+                      : plan.isEntry 
+                        ? 'rgba(251,191,36,0.08)' 
+                        : plan.isPremium
+                          ? 'linear-gradient(165deg,#4b1211,#640e0d)'
+                          : 'rgba(255,255,255,0.07)',
                   }}
                   transition={{ duration: 0.3, ease: EQ }}
                 >
-                  {plan.highlight && <div style={{ position: 'absolute', top: 18, right: 18, padding: '5px 14px', borderRadius: 999, fontSize: 10, fontWeight: 900, background: 'linear-gradient(135deg,#7c3aed,#c4b5fd)', color: '#fff' }}>⭐ Popular</div>}
-                  <div style={{ fontSize: 11, fontWeight: 800, color: plan.highlight ? '#c4b5fd' : 'rgba(255,255,255,0.45)', textTransform: 'uppercase', marginBottom: 10 }}>{plan.name}</div>
-                  <div style={{ fontFamily: '"Plus Jakarta Sans",sans-serif', fontSize: 'clamp(2.2rem,4vw,3rem)', fontWeight: 900, color: '#fff', marginBottom: 12 }}>{plan.price}</div>
-                  <p style={{ fontSize: 13, lineHeight: 1.68, color: 'rgba(255,255,255,0.68)', marginBottom: 20 }}>{plan.desc}</p>
+                  {(plan.highlight || plan.badge || plan.badge2) && (
+                    <div style={{ 
+                      position: 'absolute', top: 18, right: 18, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6
+                    }}>
+                      {plan.highlight && (
+                        <div style={{ 
+                          padding: '5px 14px', borderRadius: 999, fontSize: 10, fontWeight: 900, 
+                          background: 'linear-gradient(135deg,#7c3aed,#c4b5fd)', color: '#fff',
+                          boxShadow: '0 4px 12px rgba(124,58,237,0.3)'
+                        }}>⭐ Popular</div>
+                      )}
+                      {plan.badge && (
+                        <div style={{ 
+                          padding: '5px 14px', borderRadius: 999, fontSize: 10, fontWeight: 900, 
+                          background: plan.isEntry ? 'rgba(251,191,36,0.15)' : 'rgba(139,119,255,0.15)', 
+                          color: plan.isEntry ? '#fbbf24' : '#c4b5fd', 
+                          border: plan.isEntry ? '1px solid rgba(251,191,36,0.3)' : '1px solid rgba(139,119,255,0.3)',
+                          backdropFilter: 'blur(4px)'
+                        }}>{plan.badge}</div>
+                      )}
+                      {plan.badge2 && (
+                        <div style={{ 
+                          padding: '4px 10px', borderRadius: 999, fontSize: 9, fontWeight: 800, 
+                          background: plan.isEntry ? 'rgba(251,191,36,0.08)' : 'rgba(255,255,255,0.08)', 
+                          color: plan.isEntry ? 'rgba(251,191,36,0.6)' : 'rgba(255,255,255,0.6)', 
+                          border: plan.isEntry ? '1px solid rgba(251,191,36,0.1)' : '1px solid rgba(255,255,255,0.1)',
+                          textTransform: 'uppercase', letterSpacing: '0.02em'
+                        }}>{plan.badge2}</div>
+                      )}
+                    </div>
+                  )}
+                  <div style={{ fontSize: 11, fontWeight: 800, color: plan.highlight ? '#c4b5fd' : plan.isPremium ? '#f8f4e3' : 'rgba(255,255,255,0.45)', textTransform: 'uppercase', marginBottom: 10, opacity: plan.isPremium ? 0.7 : 1 }}>{plan.name}</div>
+                  <div style={{ fontFamily: '"Plus Jakarta Sans",sans-serif', fontSize: 'clamp(2.2rem,4vw,3rem)', fontWeight: 900, color: plan.isPremium ? '#f8f4e3' : '#fff', marginBottom: 12 }}>{plan.price}</div>
+                  {plan.valueLine && (
+                    <div style={{ 
+                      fontSize: 10.5, fontWeight: 800, color: '#fbbf24', marginBottom: 18, 
+                      background: 'rgba(251,191,36,0.1)', padding: '6px 12px', borderRadius: 10,
+                      display: 'inline-flex', alignItems: 'center', gap: 6, width: 'fit-content',
+                      border: '1px solid rgba(251,191,36,0.2)', textTransform: 'uppercase', letterSpacing: '0.01em'
+                    }}>
+                      <Star style={{ width: 12, height: 12, fill: '#fbbf24' }} /> {plan.valueLine}
+                    </div>
+                  )}
+                  <p style={{ fontSize: 13, lineHeight: 1.68, color: plan.isPremium ? 'rgba(248,244,227,0.7)' : 'rgba(255,255,255,0.68)', marginBottom: 20 }}>{plan.desc}</p>
                   <ul style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 28, flexGrow: 1 }}>
                     {plan.features.map((f, fi) => (
-                      <li key={fi} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.92)' }}>
-                        <CheckCircle style={{ width: 16, height: 16, color: plan.highlight ? '#c4b5fd' : 'rgba(255,255,255,0.40)' }} strokeWidth={2.5} />
+                      <li key={fi} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, fontWeight: 600, color: plan.isPremium ? '#f8f4e3' : 'rgba(255,255,255,0.92)' }}>
+                        <CheckCircle style={{ width: 16, height: 16, color: plan.highlight ? '#c4b5fd' : plan.isPremium ? '#f8f4e3' : 'rgba(255,255,255,0.40)' }} strokeWidth={2.5} />
                         {f}
                       </li>
                     ))}
                   </ul>
-                  <motion.a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi! I'm interested in the ${plan.name} website package.`)}`}
-                    target="_blank" rel="noopener noreferrer"
-                    style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px',
-                      borderRadius: 14, background: plan.highlight ? 'linear-gradient(135deg,#5b21b6,#8b77ff)' : 'rgba(255,255,255,0.08)',
-                      color: '#fff', fontWeight: 800, textDecoration: 'none'
-                    }}
-                    whileHover={{ scale: 1.02, background: plan.highlight ? 'linear-gradient(135deg,#6d28d9,#9b7dff)' : 'rgba(255,255,255,0.12)' }}
-                  >
-                    {plan.cta} <ArrowRight style={{ width: 15, height: 15 }} />
-                  </motion.a>
+                    <motion.a
+                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi! I'm interested in the ${plan.name} website package.`)}`}
+                      target="_blank" rel="noopener noreferrer"
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px',
+                        borderRadius: 14, marginTop: 'auto',
+                        background: plan.highlight 
+                          ? 'linear-gradient(135deg,#5b21b6,#8b77ff)' 
+                          : plan.isEntry 
+                            ? 'linear-gradient(135deg,#fbbf24,#f59e0b)' 
+                            : plan.isBasic
+                              ? 'linear-gradient(135deg,#0ea5e9,#0284c7)'
+                              : plan.isPremium
+                                ? 'linear-gradient(135deg,#7f1d1d,#3b0d0c)'
+                                : 'rgba(255,255,255,0.08)',
+                        color: plan.isEntry || plan.isBasic ? '#0d1b3e' : '#fff', fontWeight: 800, textDecoration: 'none',
+                        boxShadow: plan.isEntry ? '0 8px 20px rgba(251,191,36,0.25)' : plan.isBasic ? '0 8px 20px rgba(14,165,233,0.2)' : plan.isPremium ? '0 8px 20px rgba(59,13,12,0.3)' : 'none',
+                      }}
+                      whileHover={{ 
+                        scale: 1.02, 
+                        background: plan.highlight 
+                          ? 'linear-gradient(135deg,#6d28d9,#9b7dff)' 
+                          : plan.isEntry 
+                            ? 'linear-gradient(135deg,#fcd34d,#fbbf24)' 
+                            : plan.isBasic
+                              ? 'linear-gradient(135deg,#38bdf8,#0ea5e9)'
+                              : plan.isPremium
+                                ? 'linear-gradient(135deg,#991b1b,#540c0b)'
+                                : 'rgba(255,255,255,0.12)',
+                        boxShadow: plan.isEntry ? '0 12px 28px rgba(251,191,36,0.4)' : plan.isBasic ? '0 12px 28px rgba(14,165,233,0.35)' : plan.isPremium ? '0 12px 28px rgba(59,13,12,0.45)' : 'none',
+                      }}
+                    >
+                      {plan.cta} <ArrowRight style={{ width: 15, height: 15 }} />
+                    </motion.a>
                 </motion.div>
               </Reveal>
             ))}
@@ -692,7 +876,7 @@ export default function GetWebsite() {
             <div style={{ position: 'relative', zIndex: 1, maxWidth: 640, margin: '0 auto' }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.48)', marginBottom: 20 }}>Ready to grow online?</p>
               <h2 style={{ fontFamily: '"Plus Jakarta Sans",sans-serif', fontSize: 'clamp(2rem,5.5vw,4rem)', fontWeight: 900, lineHeight: 1.06, color: '#fff', marginBottom: 'clamp(0.8rem,2vw,1.4rem)' }}>Get Your Website Today.<br /> Let's Build Something Great.</h2>
-              <p style={{ fontSize: 'clamp(0.95rem,1.5vw,1.05rem)', color: 'rgba(255,255,255,0.62)', lineHeight: 1.74, fontWeight: 500, maxWidth: 520, margin: '0 auto clamp(2rem,3.5vw,2.8rem)' }}>Starting at just ₹9,999 — delivered in 3–5 days. Call or WhatsApp us now and get a <strong style={{ color: '#c4b5fd' }}>free consultation</strong>.</p>
+              <p style={{ fontSize: 'clamp(0.95rem,1.5vw,1.05rem)', color: 'rgba(255,255,255,0.62)', lineHeight: 1.74, fontWeight: 500, maxWidth: 520, margin: '0 auto clamp(2rem,3.5vw,2.8rem)' }}>Starting at just ₹4,999 — delivered in 2–5 days. Call or WhatsApp us now and get a <strong style={{ color: '#c4b5fd' }}>free consultation</strong>.</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 16 }}>
                 <motion.a
                   href={`tel:${PHONE_NUMBER}`}
