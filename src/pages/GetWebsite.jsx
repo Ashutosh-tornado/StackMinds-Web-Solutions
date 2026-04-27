@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+﻿import { useRef, useEffect, useState } from 'react';
 import {
   motion, useInView, AnimatePresence, useScroll, useTransform, useSpring,
 } from 'framer-motion';
@@ -233,6 +233,16 @@ function WhatsAppBtn({ size = 'md', label = 'Chat on WhatsApp', id }) {
       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`}
       target="_blank"
       rel="noopener noreferrer"
+
+
+onClick={() => {
+  if (typeof window.gtag === "function") {
+    window.gtag('event', 'conversion', {
+      'send_to': 'AW-18109892306/FSCECKj6kKAcENKNvLtD'
+    });
+  }
+}}
+      
       style={{
         display: 'inline-flex', alignItems: 'center', gap: big ? 10 : 8,
         padding: big ? '16px 36px' : '12px 26px',
@@ -313,6 +323,14 @@ function StickyMobileBar() {
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`}
             target="_blank" rel="noopener noreferrer"
             id="sticky-whatsapp-btn"
+
+              onClick={() => {
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18109892306/FSCECKj6kKAcENKNvLtD'
+      });
+    }
+  }}
             style={{
               flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
               gap: 8, padding: '12px 0', borderRadius: 12,
@@ -760,6 +778,15 @@ export default function GetWebsite() {
                     <motion.a
                       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi! I'm interested in the ${plan.name} website package.`)}`}
                       target="_blank" rel="noopener noreferrer"
+
+                      onClick={() => {
+  if (window.gtag) {
+    window.gtag('event', 'conversion', {
+      'send_to': 'AW-18109892306/FSCECKj6kKAcENKNvLtD'
+    });
+  }
+}}
+                      
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px',
                         borderRadius: 14, marginTop: 'auto',
@@ -902,6 +929,14 @@ export default function GetWebsite() {
                 <motion.a
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`}
                   target="_blank" rel="noopener noreferrer"
+                  
+                    onClick={() => {
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18109892306/FSCECKj6kKAcENKNvLtD'
+      });
+    }
+  }}
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: 10, padding: '16px 38px',
                     borderRadius: 999, background: 'linear-gradient(135deg,#128c7e,#25d366)',
