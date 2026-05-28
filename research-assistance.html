@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StackMinds Web Solutions | Grow Your Digital Business</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-fixed-variant": "#1e40af",
+                "error-container": "#f76a80",
+                "inverse-primary": "#60a5fa",
+                "on-error": "#fff7f7",
+                "on-surface": "#213156",
+                "tertiary-fixed-dim": "#00ec9a",
+                "tertiary-container": "#1dfba5",
+                "secondary-container": "#b7eaff",
+                "surface-variant": "#d9e2ff",
+                "surface-tint": "#1e40af",
+                "primary": "#1e40af",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary": "#f1faff",
+                "outline": "#6a7aa3",
+                "on-tertiary-fixed": "#00452a",
+                "tertiary": "#006d45",
+                "on-surface-variant": "#4f5e86",
+                "surface-container": "#eaedff",
+                "surface-bright": "#faf8ff",
+                "secondary-fixed-dim": "#8ae0ff",
+                "outline-variant": "#a2b1dd",
+                "surface-container-high": "#e2e7ff",
+                "error-dim": "#770326",
+                "on-secondary-container": "#00596f",
+                "primary-dim": "#1e3a8a",
+                "secondary-dim": "#005b70",
+                "surface": "#faf8ff",
+                "on-primary-container": "#001d63",
+                "on-tertiary": "#e7ffed",
+                "on-secondary-fixed-variant": "#00647b",
+                "on-tertiary-container": "#005a38",
+                "tertiary-fixed": "#1dfba5",
+                "on-primary": "#fcf7ff",
+                "secondary-fixed": "#b7eaff",
+                "on-secondary-fixed": "#004657",
+                "on-error-container": "#68001f",
+                "primary-container": "#dbeafe",
+                "surface-dim": "#cdd9ff",
+                "surface-container-highest": "#d9e2ff",
+                "surface-container-low": "#f2f3ff",
+                "background": "#faf8ff",
+                "error": "#ac3149",
+                "on-background": "#213156",
+                "tertiary-dim": "#00603c",
+                "secondary": "#006880",
+                "primary-fixed": "#dbeafe",
+                "on-primary-fixed": "#001d63",
+                "primary-fixed-dim": "#bfdbfe",
+                "on-tertiary-fixed-variant": "#00653f",
+                "inverse-on-surface": "#959cb5",
+                "inverse-surface": "#060e20"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Manrope"],
+                "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(250, 248, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #006880 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .asymmetric-shape {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .service-pill {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .service-pill:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .card-gradient-border {
+            position: relative;
+            background: #fff;
+            background-clip: padding-box;
+            border: 1px solid transparent;
+        }
+        .card-gradient-border::before {
+            content: "";
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(30,64,175,0.1), rgba(0,236,154,0.1));
+        }
+        
+        /* New Styles for Dropdown */
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Updated with shared component structure & Dropdown) -->
+<nav class="fixed top-0 w-full z-50 bg-[#faf8ff]/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(33,49,86,0.06)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-[#213156] dark:text-white tracking-tighter font-headline">
+            StackMinds
+        </div>
+<div class="hidden md:flex items-center gap-8 font-['Plus_Jakarta_Sans'] font-bold text-sm tracking-tight">
+<a class="text-[#623fde] border-b-2 border-[#623fde] pb-1 transition-colors duration-300" href="#">Home</a>
+<div class="relative group">
+<button class="flex items-center gap-1 text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300">
+                    Services <span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+<!-- Services Dropdown -->
+<div class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-outline-variant/10 py-4 hidden group-hover:block animate-in fade-in slide-in-from-top-2 duration-200">
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/web-development">Website Development</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/wordpress">WordPress Websites</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/ecommerce">Ecommerce Development</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/social-media">Social Media Marketing</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/google-ads">Google Ads</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="/services/seo">SEO</a>
+<a class="block px-6 py-2.5 hover:bg-[#623fde]/5 hover:text-[#623fde] transition-colors" href="research-assistance.html">Research &amp; Academic Assistance</a>
+</div>
+</div>
+<a class="text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300" href="#">Portfolio</a>
+<a class="text-[#213156]/70 dark:text-slate-300 hover:text-[#623fde] transition-colors duration-300" href="#">Contact</a>
+</div>
+<button class="bg-[#1e40af] text-[#fcf7ff] px-6 py-2.5 rounded-full font-headline font-bold text-sm scale-95 hover:scale-100 active:opacity-80 transition-all duration-200 ease-in-out hover:shadow-lg">
+            Get Started
+        </button>
+</div>
+</nav>
+
+<main>
+<!-- Hero Section -->
+<section class="relative pt-32 pb-12 overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-surface-container-low asymmetric-shape -z-10"></div>
+    <div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+        <div class="space-y-8">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-container text-on-primary-container text-xs font-bold tracking-widest uppercase">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Professional Services
+            </div>
+            <h1 class="text-6xl md:text-7xl font-headline font-extrabold text-on-surface leading-[1.1] tracking-tighter">
+                Professional <span class="text-gradient">Research & Academic</span> Assistance
+            </h1>
+            <p class="text-xl text-on-surface-variant font-medium leading-relaxed max-w-xl">
+                Helping students, scholars, and professionals with structured research support, academic guidance, and publication-ready documentation.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-4">
+                <button class="bg-primary hover:bg-primary-dim text-on-primary px-8 py-4 rounded-full font-headline font-bold text-lg shadow-xl shadow-primary/20 transition-all">
+                    Get Consultation
+                </button>
+                <button class="bg-[#25D366]/10 text-[#006880] px-8 py-4 rounded-full font-headline font-bold text-lg hover:bg-[#25D366]/20 transition-all flex items-center gap-2">
+                    Talk on WhatsApp
+                </button>
+            </div>
+        </div>
+        <div class="relative">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-surface-container-lowest p-4 backdrop-blur-xl border border-white/20">
+                <img alt="Research Dashboard Mockup" class="rounded-2xl w-full" data-alt="Premium research dashboard with thesis document, SPSS chart, and analytics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2WRsbd2MzVFJf87u6vRQBUAiMnZH_THs2miJxnFapnTqt8uIaPDGb3lSaLugl2a6e-FJpX31CG47lrHipDhtV9Pht12ChHnl7BlJLkDGEkq0WmX14LFi6nuaOxuHyeYSCuLAbVu9FjNYLRnibcYNBdtOFUo4ZAmIoJ5nec_c-TwWRbPy79gt5MZdLLiDAQA4XmxiZA5MBtOC_ZXYnxhxK_yfA-qNXo8NXoL2ZSNiBYVJrH2EKDVYLqSv8w1CaWw5gGYTveNIK7w" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Research Domains -->
+<section class="py-12 overflow-hidden bg-background">
+    <div class="max-w-7xl mx-auto px-8 relative">
+        <div class="flex flex-wrap justify-center gap-4">
+            <div class="px-6 py-3 rounded-full bg-surface-container text-on-surface font-bold text-sm shadow-sm">💻 Computer Science</div>
+            <div class="px-6 py-3 rounded-full bg-surface-container text-on-surface font-bold text-sm shadow-sm">📊 Management</div>
+            <div class="px-6 py-3 rounded-full bg-surface-container text-on-surface font-bold text-sm shadow-sm">🏥 Healthcare</div>
+            <div class="px-6 py-3 rounded-full bg-surface-container text-on-surface font-bold text-sm shadow-sm">🌾 Agriculture</div>
+            <div class="px-6 py-3 rounded-full bg-surface-container text-on-surface font-bold text-sm shadow-sm">📈 Commerce</div>
+            <div class="px-6 py-3 rounded-full bg-surface-container text-on-surface font-bold text-sm shadow-sm">⚙️ Engineering</div>
+            <div class="px-6 py-3 rounded-full bg-surface-container text-on-surface font-bold text-sm shadow-sm">🧠 Social Sciences</div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="py-24 bg-surface-container-low">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16 space-y-4">
+            <h2 class="text-4xl font-headline font-bold text-on-surface">Our Research Solutions</h2>
+            <p class="text-on-surface-variant max-w-2xl mx-auto text-lg">Comprehensive academic support to elevate your research quality.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-primary">description</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Thesis & Dissertation</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Comprehensive guidance for structuring and refining your doctoral or master's thesis to meet university standards.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-secondary">lightbulb</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Research Proposal</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Expert assistance in drafting compelling research proposals and synopses that secure approval.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-tertiary">menu_book</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Literature Review</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Systematic review support to identify research gaps and synthesize existing literature effectively.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-[#1e40af]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-[#1e40af]">bar_chart</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Data Analysis</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Advanced statistical analysis, hypothesis testing, and data visualization for robust research findings.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-[#006880]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-[#006880]">format_align_left</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Paper Formatting</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Precision formatting to ensure your manuscript adheres perfectly to target journal guidelines.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-primary">format_quote</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Citation & Referencing</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Accurate styling and management of references across APA, MLA, Harvard, IEEE, and Chicago formats.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-tertiary">spellcheck</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Editing & Proofreading</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Meticulous language polishing, structural editing, and tone refinement for publication-ready documents.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group hover:bg-[#f2f3ff] border border-transparent hover:border-[#623fde]/20">
+                <div class="w-12 h-12 rounded-full bg-[#1e40af]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl text-[#1e40af]">assignment</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-on-surface mb-3">Survey & Questionnaire</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed">Crafting reliable and valid survey instruments to gather high-quality primary data for your research.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How We Work Timeline -->
+<section class="py-24 bg-background">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-headline font-bold text-on-surface">How We Work</h2>
+            <p class="text-on-surface-variant mt-4 text-lg">A structured, transparent process for academic excellence.</p>
+        </div>
+        <div class="grid md:grid-cols-5 gap-8 relative">
+            <div class="hidden md:block absolute top-10 left-0 w-full h-px bg-outline-variant/30 -z-10"></div>
+            
+            <div class="relative flex flex-col items-center text-center group">
+                <div class="w-16 h-16 rounded-full bg-surface-container-lowest shadow-lg flex items-center justify-center text-primary font-bold text-xl mb-6 group-hover:bg-primary group-hover:text-white transition-all">1</div>
+                <h3 class="font-headline font-bold text-lg mb-2">Requirement Discussion</h3>
+                <p class="text-on-surface-variant text-sm">Understanding goals & guidelines.</p>
+            </div>
+            <div class="relative flex flex-col items-center text-center group">
+                <div class="w-16 h-16 rounded-full bg-surface-container-lowest shadow-lg flex items-center justify-center text-primary font-bold text-xl mb-6 group-hover:bg-primary group-hover:text-white transition-all">2</div>
+                <h3 class="font-headline font-bold text-lg mb-2">Topic & Scope Review</h3>
+                <p class="text-on-surface-variant text-sm">Evaluating feasibility.</p>
+            </div>
+            <div class="relative flex flex-col items-center text-center group">
+                <div class="w-16 h-16 rounded-full bg-surface-container-lowest shadow-lg flex items-center justify-center text-primary font-bold text-xl mb-6 group-hover:bg-primary group-hover:text-white transition-all">3</div>
+                <h3 class="font-headline font-bold text-lg mb-2">Research Planning</h3>
+                <p class="text-on-surface-variant text-sm">Outlining the methodology.</p>
+            </div>
+            <div class="relative flex flex-col items-center text-center group">
+                <div class="w-16 h-16 rounded-full bg-surface-container-lowest shadow-lg flex items-center justify-center text-primary font-bold text-xl mb-6 group-hover:bg-primary group-hover:text-white transition-all">4</div>
+                <h3 class="font-headline font-bold text-lg mb-2">Draft Review</h3>
+                <p class="text-on-surface-variant text-sm">Collaborative feedback loop.</p>
+            </div>
+            <div class="relative flex flex-col items-center text-center group">
+                <div class="w-16 h-16 rounded-full bg-surface-container-lowest shadow-lg flex items-center justify-center text-primary font-bold text-xl mb-6 group-hover:bg-primary group-hover:text-white transition-all">5</div>
+                <h3 class="font-headline font-bold text-lg mb-2">Final Formatting</h3>
+                <p class="text-on-surface-variant text-sm">Publication-ready delivery.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trust Section -->
+<section class="py-16 bg-[#213156] text-white">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+            <div class="space-y-3">
+                <span class="material-symbols-outlined text-4xl text-[#1dfba5]">lock</span>
+                <h4 class="font-bold text-sm uppercase tracking-wider">Confidential</h4>
+            </div>
+            <div class="space-y-3">
+                <span class="material-symbols-outlined text-4xl text-[#1dfba5]">account_tree</span>
+                <h4 class="font-bold text-sm uppercase tracking-wider">Structured</h4>
+            </div>
+            <div class="space-y-3">
+                <span class="material-symbols-outlined text-4xl text-[#1dfba5]">format_align_center</span>
+                <h4 class="font-bold text-sm uppercase tracking-wider">Professional</h4>
+            </div>
+            <div class="space-y-3">
+                <span class="material-symbols-outlined text-4xl text-[#1dfba5]">schedule</span>
+                <h4 class="font-bold text-sm uppercase tracking-wider">Timely Delivery</h4>
+            </div>
+            <div class="space-y-3 col-span-2 md:col-span-1">
+                <span class="material-symbols-outlined text-4xl text-[#1dfba5]">science</span>
+                <h4 class="font-bold text-sm uppercase tracking-wider">Research-Oriented</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-24 bg-surface-container-low">
+    <div class="max-w-3xl mx-auto px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-headline font-bold text-on-surface">Frequently Asked Questions</h2>
+        </div>
+        <div class="space-y-4">
+            <details class="group bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/10 cursor-pointer">
+                <summary class="flex justify-between items-center font-bold text-lg text-on-surface list-none">
+                    What services are included?
+                    <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
+                <p class="text-on-surface-variant mt-4 leading-relaxed">We offer comprehensive support including thesis guidance, data analysis, literature reviews, formatting, and proofreading. We provide professional academic consulting and do not offer ready-made assignments.</p>
+            </details>
+            <details class="group bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/10 cursor-pointer">
+                <summary class="flex justify-between items-center font-bold text-lg text-on-surface list-none">
+                    Do you support specific formatting styles?
+                    <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
+                <p class="text-on-surface-variant mt-4 leading-relaxed">Yes, our team is proficient in all major academic formatting styles including APA, MLA, Harvard, Chicago, IEEE, and custom university guidelines.</p>
+            </details>
+            <details class="group bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/10 cursor-pointer">
+                <summary class="flex justify-between items-center font-bold text-lg text-on-surface list-none">
+                    Is my research work confidential?
+                    <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
+                <p class="text-on-surface-variant mt-4 leading-relaxed">Absolutely. We maintain strict non-disclosure agreements and ensure your data and intellectual property are handled with the highest level of security.</p>
+            </details>
+            <details class="group bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/10 cursor-pointer">
+                <summary class="flex justify-between items-center font-bold text-lg text-on-surface list-none">
+                    What tools/software are supported for data analysis?
+                    <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
+                <p class="text-on-surface-variant mt-4 leading-relaxed">We assist with major statistical and qualitative analysis software, primarily focusing on SPSS, Excel, R, and NVivo.</p>
+            </details>
+        </div>
+    </div>
+</section>
+</main>
+<!-- Footer (Updated with shared component structure) -->
+<footer class="bg-[#f2f3ff] dark:bg-slate-950 w-full rounded-t-[1.5rem] py-20 px-12">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
+<div class="space-y-8">
+<div class="text-xl font-bold text-[#623fde] font-headline">
+                StackMinds
+            </div>
+<p class="font-['Manrope'] text-sm text-[#213156]/80 leading-relaxed">
+                We build high-performance digital experiences that help your business scale faster.
+            </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-[#623fde]/10 flex items-center justify-center text-[#623fde] hover:bg-[#623fde] hover:text-white transition-all duration-200" href="#"><span class="material-symbols-outlined text-sm">public</span></a>
+<a class="w-10 h-10 rounded-full bg-[#623fde]/10 flex items-center justify-center text-[#623fde] hover:bg-[#623fde] hover:text-white transition-all duration-200" href="#"><span class="material-symbols-outlined text-sm">alternate_email</span></a>
+<a class="w-10 h-10 rounded-full bg-[#623fde]/10 flex items-center justify-center text-[#623fde] hover:bg-[#623fde] hover:text-white transition-all duration-200" href="#"><span class="material-symbols-outlined text-sm">link</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-bold font-headline text-[#213156] dark:text-white mb-8">Quick Links</h4>
+<ul class="space-y-4 font-['Manrope'] text-sm">
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Home</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Services</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Portfolio</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold font-headline text-[#213156] dark:text-white mb-8">Services</h4>
+<ul class="space-y-4 font-['Manrope'] text-sm">
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/web-development">Website Development</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/wordpress">WordPress Websites</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/social-media">Social Media Marketing</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="/services/seo">SEO Services</a></li>
+<li><a class="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200" href="research-assistance.html">Research &amp; Academic Assistance</a></li>
+</ul>
+</div>
+<div class="space-y-8">
+<h4 class="text-lg font-bold font-headline text-[#213156] dark:text-white mb-8">Newsletter</h4>
+<p class="font-['Manrope'] text-sm text-[#213156]/80">Stay updated with our latest digital strategies and insights.</p>
+<div class="relative">
+<input class="w-full bg-white/50 dark:bg-slate-900 border border-outline-variant/20 rounded-full py-4 px-6 text-sm focus:outline-none focus:ring-2 focus:ring-[#623fde] placeholder:text-[#213156]/30" placeholder="Enter your email" type="email"/>
+<button class="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-[#623fde] text-white rounded-full font-bold text-xs flex items-center gap-2 hover:bg-[#5232c9] transition-colors">
+                    Subscribe <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#213156]/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="font-['Manrope'] text-sm text-[#213156]/60">© 2024 StackMinds. Ethereal Architects of Digital Environments.</p>
+<div class="flex gap-8 text-sm text-[#213156]/60">
+<a class="hover:text-[#623fde] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#623fde] transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

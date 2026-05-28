@@ -34,6 +34,8 @@ export default function Footer() {
                     <li><Link to="/services/wordpress" className="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200 text-sm">WordPress Websites</Link></li>
                     <li><Link to="/services/social-media-marketing" className="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200 text-sm">Social Media Marketing</Link></li>
                     <li><Link to="/services/seo" className="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200 text-sm">SEO Services</Link></li>
+                    <li><Link to="/research-assistance" className="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200 text-sm">Research & Academic Assistance</Link></li>
+                    <li><Link to="/research-contact" className="text-[#213156]/60 hover:text-[#623fde] hover:underline decoration-[#623fde]/30 underline-offset-4 transition-all duration-200 text-sm">Research Consultation</Link></li>
                 </ul>
             </div>
         </div>
