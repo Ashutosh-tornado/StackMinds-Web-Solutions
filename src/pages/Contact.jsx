@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { Mail, Phone, MapPin, MessageSquare, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MessageSquare, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function Contact() {
   const formRef = useRef(null);
@@ -94,15 +94,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 hover:bg-primary hover:text-white transition-colors duration-300">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Visit Us</div>
-                  <p className="text-xl font-headline font-bold text-on-surface">Virat Nagar, Virar West</p>
-                </div>
-              </div>
             </div>
 
             {/* Decorative Image */}
@@ -183,51 +174,6 @@ export default function Contact() {
             {/* Soft decorative shadow behind card */}
             <div className="absolute top-10 -right-10 w-full h-full bg-primary/5 rounded-[2.5rem] -z-10 blur-xl group-hover:bg-primary/10 transition-colors duration-500"></div>
           </div>
-        </div>
-
-        {/* Global Presence Map Section */}
-        <div className="mt-32 space-y-12">
-            <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-8">
-                {/* <div>
-                    <h2 className="text-4xl font-headline font-bold text-on-surface mb-2">Our Global Presence</h2>
-                    <p className="text-on-surface-variant text-lg max-w-lg">While we work globally, we love meeting in person at our headquarters.</p>
-                </div> */}
-                {/* <div className="flex gap-3">
-                    <span className="cursor-pointer hover:bg-secondary-container hover:text-on-secondary-container px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-bold text-xs uppercase tracking-widest transition-colors">San Francisco</span>
-                    <span className="cursor-pointer hover:bg-surface-container-high px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-bold text-xs uppercase tracking-widest transition-colors">London</span>
-                    <span className="cursor-pointer hover:bg-surface-container-high px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-bold text-xs uppercase tracking-widest transition-colors">Tokyo</span>
-                </div> */}
-            </div>
-
-            <div className="space-y-6 lg:space-y-0 relative">
-                <div className="w-full h-[250px] md:h-96 bg-surface-container-high rounded-[2.5rem] relative overflow-hidden border border-outline-variant/20 shadow-[inset_0_10px_20px_rgba(0,0,0,0.02)] group">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d332.53257264849555!2d72.80867605104041!3d19.447951590886007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1776210115084!5m2!1sen!2sin"
-                        className="w-full h-full border-0"
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                    
-                    {/* Primary Map Pin (Visible on Desktop) */}
-                    <div className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none">
-                        <div className="relative z-10 flex flex-col items-center group-hover:-translate-y-2 transition-transform duration-500 cursor-pointer pointer-events-auto">
-                            <div className="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(98,63,222,0.4)] relative animate-bounce">
-                                <MapPin className="w-6 h-6" />
-                                <div className="absolute -z-10 w-full h-full rounded-full bg-primary animate-ping opacity-20"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Floating Info Card */}
-                <div className="relative lg:absolute lg:left-8 lg:bottom-8 bg-surface-container-lowest p-6 rounded-2xl shadow-xl z-20 border border-outline-variant/10 hover:shadow-2xl hover:-translate-y-1 transition-all max-w-[calc(100%-2rem)] mx-auto lg:mx-0">
-                    <h3 className="font-headline font-bold text-[#213156] mb-1">StackMinds Web Solutions </h3>
-                    <p className="text-sm text-on-surface-variant leading-relaxed">
-                        P.P Road, Virat Nagar<br/>
-                        Virar West, 401303
-                    </p>
-                </div>
-            </div>
         </div>
 
       </div>

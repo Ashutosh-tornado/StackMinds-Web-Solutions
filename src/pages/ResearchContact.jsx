@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import { Mail, Phone, MapPin, MessageSquare, CheckCircle2, AlertCircle, Calendar, GraduationCap, Award, BookOpen } from 'lucide-react';
+import { Mail, Phone, MessageSquare, CheckCircle2, AlertCircle, Calendar, GraduationCap, Award, BookOpen } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '918637738449';
 const WHATSAPP_MSG = encodeURIComponent(
@@ -143,15 +143,6 @@ ${userMessage}
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 hover:bg-primary hover:text-white transition-colors duration-300">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Visit Us</div>
-                    <p className="text-xl font-headline font-bold text-on-surface">Virat Nagar, Virar West</p>
-                  </div>
-                </div>
               </div>
 
               {/* Research trust indicators */}
