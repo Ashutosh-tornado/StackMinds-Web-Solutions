@@ -179,7 +179,6 @@ export default function Navbar() {
                         ['Social Media Marketing', '/services/social-media-marketing'],
                         ['Google Ads', '/services/google-ads'],
                         ['SEO', '/services/seo'],
-                        ['Research & Academic Assistance', '/research-assistance'],
                         ['Content Writing', '/services/content-writing'],
                         ['Creative Designing', '/services/creative-designing'],
                       ].map(([label, path], i) => (
