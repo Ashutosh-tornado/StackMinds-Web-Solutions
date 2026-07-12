@@ -115,11 +115,11 @@ const PRICING = [
 ];
 
 const BENEFITS = [
-  { icon: Smartphone, title: 'Mobile Responsive', desc: 'Looks perfect on all devices — phones, tablets, and desktops.' },
+  { icon: Smartphone, title: 'Mobile Responsive', desc: 'Looks perfect on all devices, phones, tablets, and desktops.' },
   { icon: MessageSquare, title: 'WhatsApp Integration', desc: 'Direct WhatsApp chat button so customers can contact you instantly.' },
   { icon: Search, title: 'SEO-Ready Structure', desc: 'Built with proper headings, meta tags, and structure to rank on Google.' },
   { icon: Zap, title: 'Fast Loading', desc: 'Optimized for speed. Faster sites convert more and rank higher.' },
-  { icon: Shield, title: 'SSL Secured', desc: 'Free SSL certificate included. Your site runs on HTTPS — trusted by Google.' },
+  { icon: Shield, title: 'SSL Secured', desc: 'Free SSL certificate included. Your site runs on HTTPS, trusted by Google.' },
   { icon: TrendingUp, title: 'Lead Generation', desc: 'Designed to turn visitors into enquiries, calls, and paying customers.' },
 ];
 
@@ -425,7 +425,7 @@ export default function GetWebsite() {
         fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.90)',
         letterSpacing: '.02em',
       }}>
-        🔥 Limited Time — Get Your Business Online Starting at ₹4,999 | Local Service in Vasai-Virar
+        🔥 Limited Time, Get Your Business Online Starting at ₹4,999 | Local Service in Vasai-Virar
       </div>
 
       {/* Hero */}
@@ -555,7 +555,7 @@ export default function GetWebsite() {
               </span>
             </motion.div>
             <motion.p variants={fromB} style={{ fontSize: 'clamp(1rem,1.8vw,1.15rem)', lineHeight: 1.74, color: 'rgba(33,49,86,0.62)', fontWeight: 500, maxWidth: 720, margin: '0 auto clamp(2rem,3.5vw,2.8rem)' }}>
-              Mobile-friendly, fast, and designed to generate leads. Delivered in <strong style={{ color: '#0d1b3e' }}>2–5 days</strong> — no hidden costs.
+              Mobile-friendly, fast, and designed to generate leads. Delivered in <strong style={{ color: '#0d1b3e' }}>2–5 days</strong>, no hidden costs.
             </motion.p>
             <motion.div variants={fromB} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 14, marginBottom: 'clamp(2rem,4vw,3.5rem)' }}>
               <CallBtn size="lg" label="Call Now" id="hero-call-btn" />
@@ -903,7 +903,7 @@ export default function GetWebsite() {
             <div style={{ position: 'relative', zIndex: 1, maxWidth: 640, margin: '0 auto' }}>
               <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: '.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.48)', marginBottom: 20 }}>Ready to grow online?</p>
               <h2 style={{ fontFamily: '"Plus Jakarta Sans",sans-serif', fontSize: 'clamp(2rem,5.5vw,4rem)', fontWeight: 900, lineHeight: 1.06, color: '#fff', marginBottom: 'clamp(0.8rem,2vw,1.4rem)' }}>Get Your Website Today.<br /> Let's Build Something Great.</h2>
-              <p style={{ fontSize: 'clamp(0.95rem,1.5vw,1.05rem)', color: 'rgba(255,255,255,0.62)', lineHeight: 1.74, fontWeight: 500, maxWidth: 520, margin: '0 auto clamp(2rem,3.5vw,2.8rem)' }}>Starting at just ₹4,999 — delivered in 2–5 days. Call or WhatsApp us now and get a <strong style={{ color: '#c4b5fd' }}>free consultation</strong>.</p>
+              <p style={{ fontSize: 'clamp(0.95rem,1.5vw,1.05rem)', color: 'rgba(255,255,255,0.62)', lineHeight: 1.74, fontWeight: 500, maxWidth: 520, margin: '0 auto clamp(2rem,3.5vw,2.8rem)' }}>Starting at just ₹4,999, delivered in 2–5 days. Call or WhatsApp us now and get a <strong style={{ color: '#c4b5fd' }}>free consultation</strong>.</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 16 }}>
                 <motion.a
                   href={`tel:${PHONE_NUMBER}`}

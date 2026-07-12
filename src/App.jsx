@@ -24,7 +24,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>
-        {/* Standalone landing page — no Navbar/Footer, accessible via /get-website only */}
+        {/* Standalone landing page, no Navbar/Footer, accessible via /get-website only */}
         <Route path="/get-website" element={<GetWebsite />} />
       </Routes>
     </>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Work — StackMinds (Prototype · Evergreen)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f1e8; --bg2:#ebe7db; --panel:#fbf9f2;
+    --line:rgba(27,38,32,.15); --line-soft:rgba(27,38,32,.08);
+    --txt:#1b2620; --muted:#5f6b62; --muted2:#949a8f;
+    --acc:#2f6b4f; --acc-dim:#245840;
+    --deep:#16241d; --deep-txt:#e9e7db; --deep-mut:#9aa79d; --deep-acc:#9fceb2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;cursor:none;}
+  ::selection{background:var(--acc);color:#fff;}
+  h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1;}
+  a{color:inherit;text-decoration:none;}
+  .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,52px);}
+  .kick{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .kick .idx{color:var(--acc);}
+  .kick .dash{width:28px;height:1px;background:var(--line);}
+
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.028;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  #cur{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--acc);z-index:9999;pointer-events:none;transform:translate(-50%,-50%);}
+  #curRing{position:fixed;top:0;left:0;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,background .25s;}
+  #curRing.hot{width:58px;height:58px;border-color:var(--acc);background:rgba(47,107,79,.08);}
+  @media(pointer:coarse){body{cursor:auto;}#cur,#curRing{display:none;}}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(244,241,232,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  header .in{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;letter-spacing:-.03em;}
+  .logo b{color:var(--acc);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center;transition:color .2s;}
+  .back:hover{color:var(--acc);}
+  .navmail{font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--line);padding:9px 16px;border-radius:2px;transition:.2s;}
+  .navmail:hover{border-color:var(--acc);color:var(--acc);}
+  @media(max-width:680px){.navmail{display:none;}}
+
+  /* hero */
+  .whero{padding:clamp(48px,8vw,100px) 0 clamp(20px,3vw,36px);}
+  .whero .kick{margin-bottom:24px;}
+  .whero h1{font-size:clamp(46px,10vw,128px);font-weight:800;letter-spacing:-.04em;line-height:.94;}
+  .whero h1 .serif{color:var(--acc);}
+  .whero .sub{max-width:56ch;color:var(--muted);font-size:clamp(16px,1.6vw,19px);line-height:1.65;margin-top:24px;}
+  .whero .sub b{color:var(--txt);font-weight:600;}
+
+  /* project cards — big editorial rows */
+  .projects{padding:clamp(30px,4vw,50px) 0 clamp(60px,9vw,120px);}
+  .proj{display:grid;grid-template-columns:150px 1fr;gap:40px;padding:clamp(34px,5vw,60px) 0;border-top:1px solid var(--line);transition:padding-left .4s;}
+  .proj:last-child{border-bottom:1px solid var(--line);}
+  .proj:hover{padding-left:16px;}
+  @media(max-width:760px){.proj{grid-template-columns:1fr;gap:18px;}}
+  .proj .left .no{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--acc);margin-bottom:14px;}
+  .proj .left .badge{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:2px;border:1px solid var(--line);color:var(--muted);display:inline-block;}
+  .proj .left .badge.live{color:var(--acc);border-color:rgba(47,107,79,.4);}
+  .proj .name{font-size:clamp(30px,5vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1;transition:color .25s;display:inline-flex;align-items:center;gap:18px;}
+  .proj:hover .name{color:var(--acc);}
+  .proj .name .arw{font-family:'JetBrains Mono',monospace;font-size:.5em;color:var(--muted2);transition:transform .3s,color .3s;}
+  .proj:hover .name .arw{color:var(--acc);transform:translate(5px,-5px);}
+  .proj .desc{color:var(--muted);font-size:16px;line-height:1.7;max-width:60ch;margin:18px 0 22px;}
+  .proj .meta{display:flex;flex-wrap:wrap;gap:22px 34px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted2);}
+  .proj .meta .m b{color:var(--txt);font-weight:500;display:block;margin-top:5px;font-size:12.5px;letter-spacing:.02em;text-transform:none;}
+  .proj .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+  .proj .tags span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);border:1px solid var(--line);padding:6px 11px;border-radius:2px;}
+
+  /* note strip */
+  .cnote{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .cnote .in{padding:26px 0;display:flex;gap:14px;align-items:flex-start;}
+  .cnote .in .mono{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);line-height:1.7;letter-spacing:.02em;}
+  .cnote .in .mono b{color:var(--txt);}
+
+  /* CTA — deep evergreen panel */
+  .cta{padding:clamp(50px,8vw,110px) 0;}
+  .cta .panel{background:var(--deep);color:var(--deep-txt);border-radius:22px;padding:clamp(48px,8vw,100px) 30px;text-align:center;position:relative;overflow:hidden;}
+  .cta .panel::after{content:"";position:absolute;right:-80px;bottom:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(159,206,178,.14),transparent 70%);pointer-events:none;}
+  .cta h2{font-size:clamp(30px,5vw,58px);font-weight:800;letter-spacing:-.03em;position:relative;z-index:2;}
+  .cta h2 .serif{color:var(--deep-acc);}
+  .cta p{color:var(--deep-mut);margin:18px auto 30px;max-width:46ch;font-size:16px;position:relative;z-index:2;}
+  .cta .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
+  .lnk{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border:1px solid var(--deep-acc);background:var(--deep-acc);color:#12261c;border-radius:2px;transition:.25s;}
+  .lnk:hover{background:#b6dcc4;border-color:#b6dcc4;}
+  .lnk.ghost{background:transparent;color:var(--deep-txt);border-color:rgba(233,231,219,.3);}
+  .lnk.ghost:hover{border-color:var(--deep-txt);background:var(--deep-txt);color:var(--deep);}
+
+  footer{border-top:1px solid var(--line);padding:24px 0;}
+  footer .in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);}
+
+  [data-anim]{opacity:0;transform:translateY(28px);}
+  .note{position:fixed;bottom:12px;left:12px;z-index:9990;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);border:1px solid var(--line);padding:6px 10px;border-radius:2px;background:rgba(244,241,232,.85);}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="cur"></div>
+<div id="curRing"></div>
+<div class="note">Prototype · Work index · Evergreen</div>
+
+<header>
+  <div class="wrap in">
+    <a class="back" href="home-v3-evergreen.html">← Home</a>
+    <div class="logo">Stack<b>Minds</b></div>
+    <a href="#cta" class="navmail">Start a project ↗</a>
+  </div>
+</header>
+
+<section class="whero">
+  <div class="wrap">
+    <span class="kick" data-anim><span class="idx">✦</span> Selected work <span class="dash"></span> 2026</span>
+    <h1 data-anim>Real sites,<br>really <span class="serif">shipped.</span></h1>
+    <p class="sub" data-anim><b>Three live builds you can visit right now.</b> A media platform, a B2B client site, and a service business — spanning custom front-end, WordPress, and lead-generation design.</p>
+  </div>
+</section>
+
+<section class="projects">
+  <div class="wrap">
+
+    <a class="proj" href="work-thenationbrief.html" data-anim>
+      <div class="left">
+        <div class="no">01</div>
+        <span class="badge live">● Live</span>
+      </div>
+      <div class="right">
+        <div class="name">TheNationBrief <span class="arw">↗</span></div>
+        <p class="desc">A custom-built defence &amp; geopolitics news platform with a live "intelligence terminal" aesthetic — category feeds, daily publishing, and a distinctive identity that makes an independent outlet feel authoritative.</p>
+        <div class="meta">
+          <div class="m">Type<b>Media Platform</b></div>
+          <div class="m">Build<b>Custom Frontend</b></div>
+          <div class="m">Year<b>2026</b></div>
+          <div class="m">Role<b>Design + Build</b></div>
+        </div>
+        <div class="tags"><span>Custom Frontend</span><span>CMS</span><span>SEO</span><span>Design System</span></div>
+      </div>
+    </a>
+
+    <a class="proj" href="https://rudrtextilesolutions.com" target="_blank" data-anim>
+      <div class="left">
+        <div class="no">02</div>
+        <span class="badge live">● Live · Client</span>
+      </div>
+      <div class="right">
+        <div class="name">Rudr Textile Solutions <span class="arw">↗</span></div>
+        <p class="desc">A credibility-first B2B website for a Jacquard machine-parts supplier in Virar. Clear product pages, an enquiry-driven flow, and trust-building throughout — built to turn browsers into leads.</p>
+        <div class="meta">
+          <div class="m">Type<b>B2B Website</b></div>
+          <div class="m">Build<b>WordPress</b></div>
+          <div class="m">Year<b>2025</b></div>
+          <div class="m">Role<b>Design + Build</b></div>
+        </div>
+        <div class="tags"><span>WordPress</span><span>UI Design</span><span>Lead Gen</span><span>Responsive</span></div>
+      </div>
+    </a>
+
+    <a class="proj" href="https://stackmindsresearch.com" target="_blank" data-anim>
+      <div class="left">
+        <div class="no">03</div>
+        <span class="badge live">● Live</span>
+      </div>
+      <div class="right">
+        <div class="name">StackMinds Research <span class="arw">↗</span></div>
+        <p class="desc">A conversion-focused site for a research-support studio — clear service breakdown, a guided intake flow, and WhatsApp-first lead capture. Designed to feel trustworthy and get scholars to reach out.</p>
+        <div class="meta">
+          <div class="m">Type<b>Service Business</b></div>
+          <div class="m">Build<b>Web Design + Dev</b></div>
+          <div class="m">Year<b>2026</b></div>
+          <div class="m">Role<b>Design + Build</b></div>
+        </div>
+        <div class="tags"><span>Web Design</span><span>Copy</span><span>Lead Gen</span><span>WhatsApp</span></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="cnote">
+  <div class="wrap in">
+    <span class="mono">// <b>Note:</b> These are real, live sites you can open and inspect. More case studies are added as new client work ships —<br>&nbsp;&nbsp;&nbsp;we'd rather show three real builds than a wall of stock mockups.</span>
+  </div>
+</div>
+
+<section class="cta" id="cta">
+  <div class="wrap">
+    <div class="panel">
+      <h2 data-anim>Want to be <span class="serif">next?</span></h2>
+      <p data-anim>We're taking on a limited number of founding projects at a special rate. Let's build something real together.</p>
+      <div class="btns" data-anim>
+        <a class="lnk" href="#">Start a project ↗</a>
+        <a class="lnk ghost" href="home-v3-evergreen.html">Back to home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap in">
+    <span>© 2026 StackMinds Web Solutions</span>
+    <span>Selected work · 2026</span>
+    <span>Build · Market · Grow</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  function boot(){
+    if(!window.gsap||!window.ScrollTrigger){return setTimeout(boot,60);}
+    var gsap=window.gsap, ST=window.ScrollTrigger; gsap.registerPlugin(ST);
+    var fine=window.matchMedia('(pointer:fine)').matches;
+    if(fine){
+      var cur=document.getElementById('cur'), ring=document.getElementById('curRing');
+      var rx=0,ry=0,mxp=0,myp=0;
+      window.addEventListener('mousemove',function(e){mxp=e.clientX;myp=e.clientY;cur.style.left=mxp+'px';cur.style.top=myp+'px';});
+      gsap.ticker.add(function(){rx+=(mxp-rx)*.16;ry+=(myp-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';});
+      document.querySelectorAll('a,.lnk,.proj,.navmail,.back').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ring.classList.add('hot');});
+        el.addEventListener('mouseleave',function(){ring.classList.remove('hot');});
+      });
+    }
+    gsap.utils.toArray('[data-anim]').forEach(function(el){
+      gsap.to(el,{y:0,opacity:1,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}});
+    });
+  }
+  boot();
+})();
+</script>
+</body>
+</html>

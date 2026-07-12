@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — StackMinds (Prototype · Evergreen)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f1e8; --bg2:#ebe7db; --panel:#fbf9f2;
+    --line:rgba(27,38,32,.15); --line-soft:rgba(27,38,32,.08);
+    --txt:#1b2620; --muted:#5f6b62; --muted2:#949a8f;
+    --acc:#2f6b4f; --acc-dim:#245840;
+    --deep:#16241d; --deep-txt:#e9e7db; --deep-mut:#9aa79d; --deep-acc:#9fceb2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;cursor:none;min-height:100vh;display:flex;flex-direction:column;}
+  ::selection{background:var(--acc);color:#fff;}
+  h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1;}
+  a{color:inherit;text-decoration:none;}
+  .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,52px);}
+  .kick{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .kick .idx{color:var(--acc);}
+  .kick .dash{width:28px;height:1px;background:var(--line);}
+
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.028;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  #cur{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--acc);z-index:9999;pointer-events:none;transform:translate(-50%,-50%);}
+  #curRing{position:fixed;top:0;left:0;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,background .25s;}
+  #curRing.hot{width:58px;height:58px;border-color:var(--acc);background:rgba(47,107,79,.08);}
+  @media(pointer:coarse){body{cursor:auto;}#cur,#curRing{display:none;}}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(244,241,232,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  header .in{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;letter-spacing:-.03em;}
+  .logo b{color:var(--acc);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center;transition:color .2s;}
+  .back:hover{color:var(--acc);}
+  nav.nv{display:flex;gap:30px;}
+  nav.nv a{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s;}
+  nav.nv a:hover{color:var(--txt);}
+  @media(max-width:680px){nav.nv{display:none;}}
+
+  .main{flex:1;padding:clamp(40px,6vw,72px) 0 clamp(50px,8vw,90px);}
+  .chead{margin-bottom:clamp(34px,5vw,56px);}
+  .chead .kick{margin-bottom:22px;}
+  .chead h1{font-size:clamp(46px,10vw,132px);font-weight:800;letter-spacing:-.04em;line-height:.92;}
+  .chead h1 .serif{color:var(--acc);}
+  .chead p{max-width:52ch;color:var(--muted);font-size:clamp(16px,1.6vw,19px);line-height:1.6;margin-top:24px;}
+
+  .grid{display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:start;}
+  @media(max-width:900px){.grid{grid-template-columns:1fr;gap:26px;}}
+
+  /* form */
+  .formwrap{border:1px solid var(--line);border-radius:16px;padding:clamp(26px,4vw,44px);background:var(--panel);}
+  .formwrap .flabel{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;display:block;}
+  .field{margin-bottom:22px;}
+  .field input,.field textarea,.field select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:14px 15px;font-family:'Inter',sans-serif;font-size:15px;color:var(--txt);transition:border-color .2s;cursor:none;}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--acc);}
+  .field textarea{min-height:120px;resize:vertical;}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px;}
+  .chiprow label{font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:.2s;color:var(--muted);}
+  .chiprow input{display:none;}
+  .chiprow input:checked + label,.chiprow label:hover{border-color:var(--acc);color:var(--acc);background:rgba(47,107,79,.06);}
+  .submit{width:100%;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:16px;border:none;border-radius:6px;background:var(--acc);color:#fff;cursor:none;transition:.25s;display:flex;align-items:center;justify-content:center;gap:10px;}
+  .submit:hover{background:var(--acc-dim);}
+  .privacy{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted2);margin-top:14px;text-align:center;letter-spacing:.03em;}
+
+  /* info panel — deep evergreen */
+  .info{background:var(--deep);color:var(--deep-txt);border-radius:16px;padding:clamp(28px,4vw,40px);position:relative;overflow:hidden;}
+  .info::after{content:"";position:absolute;right:-70px;bottom:-100px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(159,206,178,.14),transparent 70%);pointer-events:none;}
+  .info .status{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--deep-acc);border:1px solid rgba(159,206,178,.3);padding:7px 13px;border-radius:999px;margin-bottom:26px;}
+  .info .status .d{width:7px;height:7px;border-radius:50%;background:var(--deep-acc);box-shadow:0 0 0 0 rgba(159,206,178,.5);animation:beat 2s infinite;}
+  @keyframes beat{0%{box-shadow:0 0 0 0 rgba(159,206,178,.45)}70%{box-shadow:0 0 0 6px rgba(159,206,178,0)}100%{box-shadow:0 0 0 0 rgba(159,206,178,0)}}
+  .info h3{color:var(--deep-txt);font-size:22px;margin-bottom:8px;position:relative;z-index:2;}
+  .info .sub{color:var(--deep-mut);font-size:14.5px;line-height:1.6;margin-bottom:26px;position:relative;z-index:2;}
+  .info .chan{border-top:1px solid rgba(233,231,219,.14);padding:16px 0;position:relative;z-index:2;}
+  .info .chan .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--deep-mut);margin-bottom:6px;}
+  .info .chan .v{font-size:16px;font-weight:500;transition:color .2s;}
+  .info .chan a.v:hover{color:var(--deep-acc);}
+  .info .foot{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--deep-mut);margin-top:22px;letter-spacing:.03em;position:relative;z-index:2;}
+
+  footer{border-top:1px solid var(--line);padding:24px 0;}
+  footer .in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);}
+
+  [data-anim]{opacity:0;transform:translateY(24px);}
+  .note{position:fixed;bottom:12px;left:12px;z-index:9990;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);border:1px solid var(--line);padding:6px 10px;border-radius:2px;background:rgba(244,241,232,.85);}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="cur"></div>
+<div id="curRing"></div>
+<div class="note">Prototype · Contact · Evergreen</div>
+
+<header>
+  <div class="wrap in">
+    <a class="back" href="home-v3-evergreen.html">← Home</a>
+    <div class="logo">Stack<b>Minds</b></div>
+    <nav class="nv">
+      <a href="home-v3-evergreen.html#services">Services</a>
+      <a href="work-index.html">Work</a>
+      <a href="home-v3-evergreen.html#about">Studio</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <div class="wrap">
+    <div class="chead">
+      <span class="kick" data-anim><span class="idx">✦</span> Contact <span class="dash"></span> Response within a day</span>
+      <h1 data-anim>Let's build <span class="serif">something.</span></h1>
+      <p data-anim>Tell us a little about your business and what you're after. Whether it's a new site, more traffic, or the whole growth engine — we'll get back to you within a day.</p>
+    </div>
+
+    <div class="grid">
+      <!-- form -->
+      <form class="formwrap" data-anim onsubmit="return false;">
+        <div class="field">
+          <label class="flabel">Your name</label>
+          <input type="text" placeholder="Jane Doe" />
+        </div>
+        <div class="field">
+          <label class="flabel">Email</label>
+          <input type="email" placeholder="jane@company.com" />
+        </div>
+        <div class="field">
+          <label class="flabel">What do you need?</label>
+          <div class="chiprow">
+            <input type="checkbox" id="c1"><label for="c1">Website</label>
+            <input type="checkbox" id="c2"><label for="c2">SEO</label>
+            <input type="checkbox" id="c3"><label for="c3">Ads</label>
+            <input type="checkbox" id="c4"><label for="c4">Social</label>
+            <input type="checkbox" id="c5"><label for="c5">Not sure yet</label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="flabel">Budget range (optional)</label>
+          <select>
+            <option>Select a range</option>
+            <option>Under ₹25k</option>
+            <option>₹25k – ₹75k</option>
+            <option>₹75k – ₹2L</option>
+            <option>₹2L+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="flabel">Tell us about your project</label>
+          <textarea placeholder="A few lines about your business, your goals, and your timeline…"></textarea>
+        </div>
+        <button class="submit" type="submit">Send message →</button>
+        <div class="privacy">🔒 Your details stay private. We never share your information.</div>
+      </form>
+
+      <!-- info -->
+      <aside class="info" data-anim>
+        <span class="status"><span class="d"></span>Available for new projects</span>
+        <h3>Prefer to talk directly?</h3>
+        <p class="sub">The fastest way to reach us is WhatsApp or email — you'll get a real reply from the person who'd build your project.</p>
+        <div class="chan"><div class="k">Email</div><a class="v" href="mailto:info@stackminds.in">info@stackminds.in</a></div>
+        <div class="chan"><div class="k">WhatsApp</div><a class="v" href="https://wa.me/919579837110" target="_blank">+91 95798 37110</a></div>
+        <div class="chan"><div class="k">Call</div><a class="v" href="tel:+919579837110">+91 95798 37110</a></div>
+        <div class="chan"><div class="k">Social</div><div class="v">Instagram · LinkedIn</div></div>
+        <div class="chan"><div class="k">Based</div><div class="v">India — working worldwide</div></div>
+        <div class="foot">// Founding-client spots open — early projects get a special rate.</div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap in">
+    <span>© 2026 StackMinds Web Solutions</span>
+    <span>Build · Market · Grow</span>
+    <span>info@stackminds.in</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  function boot(){
+    if(!window.gsap){return setTimeout(boot,60);}
+    var gsap=window.gsap;
+    var fine=window.matchMedia('(pointer:fine)').matches;
+    if(fine){
+      var cur=document.getElementById('cur'), ring=document.getElementById('curRing');
+      var rx=0,ry=0,mxp=0,myp=0;
+      window.addEventListener('mousemove',function(e){mxp=e.clientX;myp=e.clientY;cur.style.left=mxp+'px';cur.style.top=myp+'px';});
+      gsap.ticker.add(function(){rx+=(mxp-rx)*.16;ry+=(myp-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';});
+      document.querySelectorAll('a,.submit,.chiprow label,.field input,.field textarea,.field select,.back').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ring.classList.add('hot');});
+        el.addEventListener('mouseleave',function(){ring.classList.remove('hot');});
+      });
+    }
+    gsap.to('[data-anim]',{y:0,opacity:1,duration:.8,stagger:.1,ease:'power3.out',delay:.1});
+  }
+  boot();
+})();
+</script>
+</body>
+</html>

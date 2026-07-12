@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SEO — Services · StackMinds (Prototype · Evergreen)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f1e8; --bg2:#ebe7db; --panel:#fbf9f2;
+    --line:rgba(27,38,32,.15); --line-soft:rgba(27,38,32,.08);
+    --txt:#1b2620; --muted:#5f6b62; --muted2:#949a8f;
+    --acc:#2f6b4f; --acc-dim:#245840;
+    --deep:#16241d; --deep-txt:#e9e7db; --deep-mut:#9aa79d; --deep-acc:#9fceb2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5;cursor:none;}
+  ::selection{background:var(--acc);color:#fff;}
+  h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1;}
+  a{color:inherit;text-decoration:none;}
+  .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,52px);}
+  .kick{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;}
+  .kick .idx{color:var(--acc);}
+  .kick .dash{width:28px;height:1px;background:var(--line);}
+
+  .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.028;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  #cur{position:fixed;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--acc);z-index:9999;pointer-events:none;transform:translate(-50%,-50%);}
+  #curRing{position:fixed;top:0;left:0;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s,background .25s;}
+  #curRing.hot{width:58px;height:58px;border-color:var(--acc);background:rgba(47,107,79,.08);}
+  @media(pointer:coarse){body{cursor:auto;}#cur,#curRing{display:none;}}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(244,241,232,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  header .in{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;letter-spacing:-.03em;}
+  .logo b{color:var(--acc);}
+  .back{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;gap:8px;align-items:center;transition:color .2s;}
+  .back:hover{color:var(--acc);}
+  .navmail{font-family:'JetBrains Mono',monospace;font-size:12px;border:1px solid var(--line);padding:9px 16px;border-radius:2px;transition:.2s;}
+  .navmail:hover{border-color:var(--acc);color:var(--acc);}
+  @media(max-width:680px){.navmail{display:none;}}
+
+  /* hero */
+  .shero{padding:clamp(46px,7vw,92px) 0 clamp(30px,4vw,54px);}
+  .shero .kick{margin-bottom:24px;}
+  .shero h1{font-size:clamp(44px,8.5vw,116px);font-weight:800;letter-spacing:-.04em;line-height:.94;max-width:16ch;}
+  .shero h1 .serif{color:var(--acc);}
+  .shero .sub{max-width:56ch;color:var(--muted);font-size:clamp(16px,1.6vw,20px);line-height:1.6;margin-top:26px;}
+  .shero .sub b{color:var(--txt);font-weight:600;}
+  .shero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+  .lnk{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border:1px solid var(--line);border-radius:2px;transition:.25s;}
+  .lnk.solid{background:var(--acc);border-color:var(--acc);color:#fff;}
+  .lnk.solid:hover{background:var(--acc-dim);border-color:var(--acc-dim);}
+  .lnk:hover{background:var(--txt);color:var(--bg);border-color:var(--txt);}
+  .lnk.solid:hover{color:#fff;}
+
+  .sec{padding:clamp(56px,8vw,110px) 0;border-top:1px solid var(--line);}
+  .two{display:grid;grid-template-columns:300px 1fr;gap:50px;align-items:start;}
+  @media(max-width:820px){.two{grid-template-columns:1fr;gap:22px;}}
+  .two .lbl h2{font-size:clamp(24px,3vw,38px);}
+  .two .lbl .kick{margin-bottom:18px;}
+  .two .body p{color:var(--muted);font-size:16px;line-height:1.8;max-width:60ch;}
+  .two .body p + p{margin-top:22px;}
+  .two .body p b{color:var(--txt);font-weight:600;}
+  .two .body .serif{color:var(--acc);font-size:1.05em;}
+
+  /* included list */
+  .feat{margin-top:6px;}
+  .feat .row{display:grid;grid-template-columns:60px 240px 1fr;gap:22px;padding:26px 0;border-top:1px solid var(--line);align-items:start;}
+  .feat .row:last-child{border-bottom:1px solid var(--line);}
+  @media(max-width:760px){.feat .row{grid-template-columns:44px 1fr;}.feat .row .fd{grid-column:1/-1;}}
+  .feat .row .no{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--acc);}
+  .feat .row h3{font-size:20px;font-weight:700;}
+  .feat .row .fd{color:var(--muted);font-size:15px;line-height:1.7;max-width:54ch;}
+
+  /* process steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(max-width:820px){.steps{grid-template-columns:1fr 1fr;}}
+  @media(max-width:500px){.steps{grid-template-columns:1fr;}}
+  .steps .st{background:var(--bg);padding:30px 24px 38px;}
+  .steps .st .no{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--acc);margin-bottom:22px;}
+  .steps .st h3{font-size:19px;font-weight:700;margin-bottom:10px;}
+  .steps .st p{color:var(--muted);font-size:13.5px;line-height:1.6;}
+
+  /* deliverables */
+  .deliv{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media(max-width:680px){.deliv{grid-template-columns:1fr;}}
+  .deliv .d{border:1px solid var(--line);border-radius:6px;padding:20px 22px;display:flex;gap:14px;align-items:flex-start;background:var(--panel);}
+  .deliv .d .mk{font-family:'JetBrains Mono',monospace;color:var(--acc);font-size:14px;margin-top:2px;}
+  .deliv .d p{color:var(--txt);font-size:14.5px;line-height:1.55;}
+  .deliv .d p span{display:block;color:var(--muted);font-size:13px;margin-top:4px;}
+
+  .honest{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted2);margin-top:30px;letter-spacing:.03em;line-height:1.7;border-left:2px solid var(--line);padding-left:16px;}
+
+  /* other services */
+  .others{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px;}
+  @media(max-width:760px){.others{grid-template-columns:1fr;}}
+  .others a{border:1px solid var(--line);border-radius:8px;padding:26px 24px;transition:.25s;background:var(--panel);}
+  .others a:hover{border-color:var(--acc);background:var(--bg2);}
+  .others a .t{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px;}
+  .others a h3{font-size:20px;font-weight:700;margin-bottom:8px;}
+  .others a p{color:var(--muted);font-size:13.5px;line-height:1.6;}
+  .others a .go{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted2);margin-top:14px;display:block;}
+
+  /* CTA */
+  .cta{padding:clamp(50px,8vw,110px) 0;}
+  .cta .panel{background:var(--deep);color:var(--deep-txt);border-radius:22px;padding:clamp(48px,8vw,100px) 30px;text-align:center;position:relative;overflow:hidden;}
+  .cta .panel::after{content:"";position:absolute;right:-80px;bottom:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(159,206,178,.14),transparent 70%);pointer-events:none;}
+  .cta h2{font-size:clamp(30px,5vw,58px);font-weight:800;letter-spacing:-.03em;position:relative;z-index:2;}
+  .cta h2 .serif{color:var(--deep-acc);}
+  .cta p{color:var(--deep-mut);margin:18px auto 30px;max-width:46ch;font-size:16px;position:relative;z-index:2;}
+  .cta .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;}
+  .cta .lnk{border-color:var(--deep-acc);background:var(--deep-acc);color:#12261c;}
+  .cta .lnk:hover{background:#b6dcc4;border-color:#b6dcc4;color:#12261c;}
+  .cta .lnk.ghost{background:transparent;color:var(--deep-txt);border-color:rgba(233,231,219,.3);}
+  .cta .lnk.ghost:hover{border-color:var(--deep-txt);background:var(--deep-txt);color:var(--deep);}
+
+  footer{border-top:1px solid var(--line);padding:24px 0;}
+  footer .in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);}
+
+  [data-anim]{opacity:0;transform:translateY(28px);}
+  .note{position:fixed;bottom:12px;left:12px;z-index:9990;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);border:1px solid var(--line);padding:6px 10px;border-radius:2px;background:rgba(244,241,232,.85);}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="cur"></div>
+<div id="curRing"></div>
+<div class="note">Prototype · Service · Evergreen</div>
+
+<header>
+  <div class="wrap in">
+    <a class="back" href="home-v3-evergreen.html">← Home</a>
+    <div class="logo">Stack<b>Minds</b></div>
+    <a href="#cta" class="navmail">Start a project ↗</a>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="shero">
+  <div class="wrap">
+    <span class="kick" data-anim><span class="idx">Services / Market</span> <span class="dash"></span> Search Engine Optimization</span>
+    <h1 data-anim>Get found by the people <span class="serif">already searching</span> for you.</h1>
+    <p class="sub" data-anim><b>SEO turns your website into a magnet for ready-to-buy customers.</b> We make your site easy for Google to understand, trust, and rank — so the right people find you without you paying for every click.</p>
+    <div class="cta">
+      <a href="#cta" class="lnk solid" data-anim>Get a free SEO look ↗</a>
+      <a href="#included" class="lnk" data-anim>What's included</a>
+    </div>
+  </div>
+</section>
+
+<!-- why -->
+<section class="sec">
+  <div class="wrap two">
+    <div class="lbl"><span class="kick" data-anim><span class="idx">(01)</span> Why it matters</span><h2 data-anim>Traffic you don't rent</h2></div>
+    <div class="body">
+      <p data-anim>Ads stop the moment you stop paying. <b>SEO compounds.</b> A page that ranks keeps bringing in visitors month after month — the closest thing to a free, always-on sales channel your business can own.</p>
+      <p data-anim>But ranking isn't luck. It's the sum of a fast, well-structured site, pages built around what people actually search, and the trust signals Google looks for. That's the work — and it's <span class="serif">exactly</span> what we do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- included -->
+<section class="sec" id="included">
+  <div class="wrap">
+    <div class="two">
+      <div class="lbl"><span class="kick" data-anim><span class="idx">(02)</span> What's included</span><h2 data-anim>The full picture</h2></div>
+      <div class="body"><p data-anim>SEO isn't one thing — it's several disciplines working together. Here's what we cover.</p></div>
+    </div>
+    <div class="feat">
+      <div class="row" data-anim><div class="no">01</div><h3>Technical SEO</h3><div class="fd">Speed, mobile, crawlability, structured data, and clean architecture — the foundation that lets everything else rank.</div></div>
+      <div class="row" data-anim><div class="no">02</div><h3>Keyword &amp; intent research</h3><div class="fd">We map what your customers actually type — and the intent behind it — so we target searches that turn into enquiries.</div></div>
+      <div class="row" data-anim><div class="no">03</div><h3>On-page optimization</h3><div class="fd">Titles, headings, content, and internal links tuned per page so Google understands exactly what you offer.</div></div>
+      <div class="row" data-anim><div class="no">04</div><h3>Local SEO</h3><div class="fd">Google Business Profile, local citations, and location pages so nearby customers find you first.</div></div>
+      <div class="row" data-anim><div class="no">05</div><h3>Content &amp; strategy</h3><div class="fd">A plan for the pages and articles that attract the right traffic and answer real buyer questions.</div></div>
+      <div class="row" data-anim><div class="no">06</div><h3>Tracking &amp; reporting</h3><div class="fd">Analytics, Search Console, and plain-English reports so you always know what's working and what's next.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- process -->
+<section class="sec">
+  <div class="wrap">
+    <div class="two" style="margin-bottom:40px">
+      <div class="lbl"><span class="kick" data-anim><span class="idx">(03)</span> How we work</span><h2 data-anim>A clear method</h2></div>
+      <div class="body"><p data-anim>No black box, no jargon. A steady, transparent process you can actually follow.</p></div>
+    </div>
+    <div class="steps" data-anim>
+      <div class="st"><div class="no">01 / Audit</div><h3>Find the gaps</h3><p>A full technical and content audit to see exactly where you stand and what's holding you back.</p></div>
+      <div class="st"><div class="no">02 / Fix</div><h3>Build the base</h3><p>We resolve technical issues and optimize your core pages so the site is ready to rank.</p></div>
+      <div class="st"><div class="no">03 / Grow</div><h3>Earn rankings</h3><p>Ongoing content and on-page work targeting the searches that bring you customers.</p></div>
+      <div class="st"><div class="no">04 / Measure</div><h3>Report &amp; refine</h3><p>We track movement, double down on what works, and keep improving month over month.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- deliverables + honest -->
+<section class="sec">
+  <div class="wrap two">
+    <div class="lbl"><span class="kick" data-anim><span class="idx">(04)</span> What you get</span><h2 data-anim>Deliverables</h2></div>
+    <div class="body">
+      <div class="deliv" data-anim>
+        <div class="d"><span class="mk">✦</span><p>SEO audit &amp; action plan<span>A prioritized roadmap, not a 60-page PDF nobody reads.</span></p></div>
+        <div class="d"><span class="mk">✦</span><p>Technical fixes<span>Speed, structure, and indexing sorted properly.</span></p></div>
+        <div class="d"><span class="mk">✦</span><p>Optimized key pages<span>Your most important pages tuned to rank and convert.</span></p></div>
+        <div class="d"><span class="mk">✦</span><p>Monthly reporting<span>Clear updates on rankings, traffic, and next steps.</span></p></div>
+      </div>
+      <p class="honest" data-anim>// Honest note: SEO is a long game — real results take months, and no one can promise a #1 ranking (be wary of anyone who does). We're upfront that we're building our SEO case studies, so early clients get extra care and honest, transparent reporting from day one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- other services -->
+<section class="sec">
+  <div class="wrap">
+    <div class="two" style="margin-bottom:40px">
+      <div class="lbl"><span class="kick" data-anim><span class="idx">(05)</span> Also available</span><h2 data-anim>Other services</h2></div>
+      <div class="body"><p data-anim>SEO works best alongside the rest of the growth system.</p></div>
+    </div>
+    <div class="others">
+      <a href="#" data-anim><div class="t">Build</div><h3>Web Design &amp; Dev</h3><p>Fast, distinctive websites engineered to convert — the foundation SEO builds on.</p><span class="go">Explore ↗</span></a>
+      <a href="#" data-anim><div class="t">Market</div><h3>Google &amp; Meta Ads</h3><p>Instant, targeted traffic while your SEO builds momentum in the background.</p><span class="go">Explore ↗</span></a>
+      <a href="#" data-anim><div class="t">Grow</div><h3>Analytics &amp; CRO</h3><p>Turn the traffic you earn into more enquiries and sales.</p><span class="go">Explore ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="wrap">
+    <div class="panel">
+      <h2 data-anim>Want to rank <span class="serif">higher?</span></h2>
+      <p data-anim>Start with a free look at your site's SEO — we'll tell you the biggest opportunities, no strings attached.</p>
+      <div class="btns" data-anim>
+        <a class="lnk" href="contact.html">Get a free SEO look ↗</a>
+        <a class="lnk ghost" href="home-v3-evergreen.html">Back to home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap in">
+    <span>© 2026 StackMinds Web Solutions</span>
+    <span>Services · SEO</span>
+    <span>Build · Market · Grow</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  function boot(){
+    if(!window.gsap||!window.ScrollTrigger){return setTimeout(boot,60);}
+    var gsap=window.gsap, ST=window.ScrollTrigger; gsap.registerPlugin(ST);
+    var fine=window.matchMedia('(pointer:fine)').matches;
+    if(fine){
+      var cur=document.getElementById('cur'), ring=document.getElementById('curRing');
+      var rx=0,ry=0,mxp=0,myp=0;
+      window.addEventListener('mousemove',function(e){mxp=e.clientX;myp=e.clientY;cur.style.left=mxp+'px';cur.style.top=myp+'px';});
+      gsap.ticker.add(function(){rx+=(mxp-rx)*.16;ry+=(myp-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';});
+      document.querySelectorAll('a,.lnk,.feat .row,.others a,.navmail,.back').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ring.classList.add('hot');});
+        el.addEventListener('mouseleave',function(){ring.classList.remove('hot');});
+      });
+    }
+    gsap.utils.toArray('[data-anim]').forEach(function(el){
+      gsap.to(el,{y:0,opacity:1,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}});
+    });
+  }
+  boot();
+})();
+</script>
+</body>
+</html>

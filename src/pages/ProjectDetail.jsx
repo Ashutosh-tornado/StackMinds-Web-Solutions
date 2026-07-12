@@ -1,187 +1,184 @@
 import { useParams, Link } from 'react-router-dom';
-import { CheckCircle2, Sparkles, Ruler, Box, Zap, ShoppingCart, Shield, BarChart2, Cpu } from 'lucide-react';
-import { portfolioData } from '../data/portfolioData';
+import { getProject } from '../data/portfolioData';
+import { useReveal } from '../hooks/useReveal';
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
-  
-  // Provide a fallback if route doesn't match
-  const data = portfolioData[projectId] || portfolioData["nexus-analytics"];
+  const p = getProject(projectId);
+  useReveal([projectId]);
 
-  // A helper map for rendering the dynamic icons in the Feature List
-  const iconMap = {
-    Sparkles, Ruler, Box, Zap, ShoppingCart, Shield, BarChart2, Cpu
+  if (!p) {
+    return (
+      <section className="sec">
+        <div className="wrap">
+          <span className="kick"><span className="idx">404</span> <span className="dash" /> Not found</span>
+          <h1 style={{ fontSize: 'clamp(32px,6vw,64px)', margin: '20px 0' }}>Project not found</h1>
+          <Link to="/portfolio" className="lnk">All work</Link>
+        </div>
+      </section>
+    );
+  }
+
+  const nextP = getProject(p.next);
+  const shots = p.screenshots || [];
+
+  const onImgError = (e) => {
+    e.currentTarget.style.display = 'none';
+    const ph = e.currentTarget.nextElementSibling;
+    if (ph) ph.style.display = 'flex';
   };
 
   return (
     <>
-      <div className="bg-[#faf8ff] min-h-screen">
-        {/* HERO SECTION */}
-        <section className="px-8 pt-24 pb-16 max-w-7xl mx-auto">
-          <div className="space-y-6 max-w-4xl mb-12">
-            <div className="inline-flex items-center gap-2 bg-[#d1f4ff] text-[#006080] px-4 py-2 rounded-full font-bold text-[10px] tracking-widest uppercase">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              {data.tag}
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl font-headline font-extrabold text-[#213156] leading-[1.05] tracking-tight">
-              {data.titleLine1} <br />
-              <span className="text-[#623fde]">{data.titleLine2}</span>
-            </h1>
-            
-            <p className="text-xl text-[#213156]/70 leading-relaxed font-body max-w-2xl">
-              {data.subtitle}
-            </p>
-          </div>
-
-          <div className="relative">
-            <div className="rounded-[2rem] overflow-hidden shadow-2xl bg-black aspect-[4/3] sm:aspect-[16/9] md:aspect-[24/10]">
-              <img 
-                  src={data.heroImg} 
-                  alt="Project Hero" 
-                  className="w-full h-full object-cover opacity-90"
-              />
-            </div>
-            
-            {/* Floating Stat Card */}
-            <div className="relative mt-8 mx-auto w-[90%] md:w-auto md:mt-0 md:absolute md:bottom-12 md:right-12 bg-white/90 backdrop-blur-md p-6 md:px-8 md:py-6 rounded-2xl shadow-xl flex flex-col items-center border border-white/20 z-20 transition-all duration-300">
-              <span className="text-[#623fde] text-4xl md:text-5xl font-headline font-black mb-1">{data.statValue}</span>
-              <span className="text-[#213156]/60 text-[10px] font-bold tracking-widest uppercase">{data.statLabel}</span>
-            </div>
-          </div>
-        </section>
-
-        {/* OVERVIEW & SIDE PANEL */}
-        <section className="px-8 py-16 max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-            
-            {/* Left Column (Project Overview) */}
-            <div className="lg:w-2/3 space-y-12">
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-8 h-1 bg-[#623fde] rounded-full"></div>
-                  <h2 className="text-3xl font-headline font-bold text-[#213156]">Project Overview</h2>
-                </div>
-                
-                <div className="space-y-6 text-lg text-[#213156]/70 leading-relaxed">
-                  {data.overview.map((paragraph, idx) => (
-                    <p key={idx}>{paragraph}</p>
-                  ))}
-                </div>
-              </div>
-
-              {/* Meta Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-8 border-t border-[#213156]/10">
-                <div>
-                  <div className="text-[10px] font-bold text-[#213156]/50 uppercase tracking-widest mb-2">Client</div>
-                  <div className="font-headline font-bold text-[#213156]">{data.client}</div>
-                </div>
-                <div>
-                  <div className="text-[10px] font-bold text-[#213156]/50 uppercase tracking-widest mb-2">Duration</div>
-                  <div className="font-headline font-bold text-[#213156]">{data.duration}</div>
-                </div>
-                <div>
-                  <div className="text-[10px] font-bold text-[#213156]/50 uppercase tracking-widest mb-2">Release</div>
-                  <div className="font-headline font-bold text-[#213156]">{data.release}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column (Side Panel) */}
-            <div className="lg:w-1/3 space-y-8">
-              {/* Scope of Work Box */}
-              <div className="bg-[#623fde] p-8 md:p-10 rounded-[2rem] text-white shadow-xl shadow-[#623fde]/20">
-                <h3 className="font-headline font-bold text-2xl mb-8">Scope of Work</h3>
-                <ul className="space-y-5">
-                  {data.scope.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-4">
-                      <CheckCircle2 className="w-5 h-5 text-[#00E676] shrink-0 mt-0.5" />
-                      <span className="font-medium">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Tools Used Box */}
-              <div className="bg-[#f0edfa] p-8 md:p-10 rounded-[2rem]">
-                <h3 className="font-headline font-bold text-2xl text-[#213156] mb-8">Tools Used</h3>
-                <div className="flex flex-wrap gap-3">
-                  {data.tools.map((tool, idx) => (
-                    <span 
-                      key={idx} 
-                      className="bg-white px-5 py-2.5 rounded-full text-sm font-bold text-[#623fde] shadow-sm hover:shadow-md transition-shadow cursor-default border border-[#e2ddf2]"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </section>
-
-        {/* FEATURE SECTION */}
-        <section className="px-8 py-24 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            
-            {/* Left: Mobile UI Box */}
-            <div className="bg-white p-12 md:p-16 rounded-[3rem] shadow-[0_20px_60px_rgba(33,49,86,0.05)] flex items-center justify-center relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full blur-[80px]"></div>
-                <img src={data.featureImg} alt="Mobile feature UI" className="relative z-10 w-full max-w-[280px] object-contain drop-shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" />
-            </div>
-
-            {/* Right: Feature Text */}
-            <div className="space-y-8">
-              <h2 className="text-4xl font-headline font-bold text-[#213156] leading-tight">
-                {data.featureTitle}
-              </h2>
-              <p className="text-lg text-[#213156]/70 leading-relaxed">
-                {data.featureText}
-              </p>
-              
-              <div className="space-y-4 pt-4">
-                {data.featuresList.map((feature, idx) => {
-                  const IconComp = iconMap[feature.icon] || Sparkles;
-                  return (
-                    <div key={idx} className="flex items-center gap-4 bg-[#f0edfa] px-6 py-4 rounded-xl group hover:bg-[#623fde] transition-colors duration-300 cursor-default">
-                      <IconComp className="w-5 h-5 text-[#623fde] group-hover:text-white transition-colors" />
-                      <span className="font-bold text-[#213156] group-hover:text-white transition-colors">{feature.title}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* CTA SECTION */}
-        <section className="px-6 py-16 md:py-24 max-w-7xl mx-auto">
-          <div className="bg-[#5735c9] rounded-[3rem] p-10 sm:p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-[#623fde]/20">
-            {/* Subtle Gradient Backings */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#7c5deb] rounded-full blur-[100px] -mr-32 -mt-32 opacity-80"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#4c2bb5] rounded-full blur-[100px] -ml-32 -mb-32 opacity-80"></div>
-            
-            <div className="relative z-10 space-y-8 md:space-y-10 max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-headline font-bold text-white leading-tight">
-                Ready to start a similar project?
-              </h2>
-              <p className="text-[#d1c4f9] text-lg md:text-xl leading-relaxed max-w-md md:max-w-none mx-auto">
-                Let's collaborate to architect your next digital environment. Our team is ready to translate your vision into a high-performance reality.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                <Link to="/contact" className="w-full sm:w-auto bg-white text-[#623fde] px-10 py-4 rounded-full font-headline font-bold flex justify-center hover:scale-105 transition-transform shadow-xl hover:bg-slate-50">
-                  Book a Strategy Call
-                </Link>
-                <Link to="/services" className="w-full sm:w-auto border-2 border-white/30 text-white px-10 py-4 rounded-full font-headline font-bold flex justify-center hover:bg-white/10 transition-colors">
-                  View All Services
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+      <div className="wrap detail-back">
+        <Link to="/portfolio">All work</Link>
       </div>
+
+      {/* hero */}
+      <section className="chero">
+        <div className="wrap">
+          <span className="kick reveal"><span className="idx">Work / {p.index}</span> <span className="dash" /> {p.category}</span>
+          <h1 className="reveal">{p.title1}<span className="serif">{p.titleSerif}</span></h1>
+          <p className="sum reveal">{p.summary}</p>
+          <div className="meta-grid reveal">
+            <div className="mg"><div className="k">Role</div><div className="v">{p.meta.role}</div></div>
+            <div className="mg"><div className="k">Type</div><div className="v">{p.meta.type}</div></div>
+            <div className="mg"><div className="k">Year</div><div className="v">{p.meta.year}</div></div>
+            <div className="mg"><div className="k">Stack</div><div className="v">{p.meta.stack}</div></div>
+            <div className="mg"><div className="k">Status</div><div className="v acc">{p.meta.status}</div></div>
+          </div>
+        </div>
+      </section>
+
+      {/* screenshots gallery */}
+      <div className="plate-wrap">
+        <div className="wrap">
+          {shots.length ? (
+            <div className="shots">
+              {shots.map((src, i) => (
+                <figure className="plate reveal" key={src}>
+                  <div className="bar">
+                    <span className="dots"><i /><i /><i /></span>
+                    <span className="url">{p.urlLabel}</span>
+                    <span className="sys"><span className="d" />Live</span>
+                  </div>
+                  <img className="shot" src={src} alt={`${p.name} screenshot ${i + 1}`} loading="lazy" onError={onImgError} />
+                  <div className="ph" style={{ display: 'none' }}>
+                    <div className="nm">Screenshot {i + 1}</div>
+                    <div className="hint">Save file at: public{src}</div>
+                  </div>
+                </figure>
+              ))}
+            </div>
+          ) : (
+            <div className="plate reveal">
+              <div className="bar">
+                <span className="dots"><i /><i /><i /></span>
+                <span className="url">{p.urlLabel}</span>
+                <span className="sys"><span className="d" />Live</span>
+              </div>
+              <div className="ph" style={{ display: 'flex' }}>
+                <div className="nm">{p.name}</div>
+                <div className="hint">▢ Real screenshot goes here</div>
+              </div>
+            </div>
+          )}
+          <div className="plate-cap">↑ Screenshots load from the <code>public/work/</code> folder.</div>
+        </div>
+      </div>
+
+      {/* overview */}
+      <section className="sec">
+        <div className="wrap two">
+          <div className="lbl"><span className="kick reveal"><span className="idx">(01)</span> Overview</span><h2 className="reveal">The brief</h2></div>
+          <div className="body">
+            {p.overview.map((t, i) => <p className="reveal" key={i}>{t}</p>)}
+          </div>
+        </div>
+      </section>
+
+      {/* challenge */}
+      <section className="sec">
+        <div className="wrap two">
+          <div className="lbl"><span className="kick reveal"><span className="idx">(02)</span> Challenge</span><h2 className="reveal">What was hard</h2></div>
+          <div className="body">
+            {p.challenge.map((c, i) => (
+              <p className="reveal" key={i}><b>{c.lead}</b> {c.text}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* approach */}
+      <section className="sec">
+        <div className="wrap">
+          <div className="two">
+            <div className="lbl"><span className="kick reveal"><span className="idx">(03)</span> Approach</span><h2 className="reveal">What we built</h2></div>
+            <div className="body"><p className="reveal">{p.approachIntro}</p></div>
+          </div>
+          <div className="feat">
+            {p.approach.map((a, i) => (
+              <div className="row reveal" key={i}>
+                <div className="fno">{String(i + 1).padStart(2, '0')}</div>
+                <h3>{a.title}</h3>
+                <div className="fd">{a.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* details */}
+      <section className="sec">
+        <div className="wrap two">
+          <div className="lbl"><span className="kick reveal"><span className="idx">(04)</span> Details</span><h2 className="reveal">Under the hood</h2></div>
+          <div className="body">
+            <p className="reveal" style={{ marginBottom: 26 }}>{p.detailsIntro}</p>
+            <div className="stack reveal">
+              {p.stack.map((s) => <span key={s}>{s}</span>)}
+            </div>
+            <div className="status-grid reveal">
+              {p.statusGrid.map((s, i) => (
+                <div className="s" key={i}>
+                  <div className={`v ${s.acc ? 'acc' : ''}`}>{s.v}</div>
+                  <div className="k">{s.k}</div>
+                </div>
+              ))}
+            </div>
+            <p className="honest reveal">{p.honest}</p>
+            <div style={{ marginTop: 30 }} className="reveal">
+              <a className="lnk solid" href={p.liveUrl} target="_blank" rel="noreferrer">Visit the live site ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* next project */}
+      {nextP && (
+        <section className="nextp">
+          <div className="wrap">
+            <div className="k">Next project</div>
+            <Link className="big2" to={`/portfolio/${nextP.slug}`}>
+              <h2>{nextP.name}</h2>
+              <span className="arw">↗</span>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* cta */}
+      <section className="cta-sec">
+        <div className="wrap">
+          <div className="deep-panel center reveal">
+            <div className="ph2">Have something to <span className="serif">build?</span></div>
+            <p className="ptext">Whether it's a product of your own or a site for your business, let's make something that actually performs.</p>
+            <div className="btns">
+              <Link className="lnk" to="/contact">Start a project ↗</Link>
+              <Link className="lnk ghost" to="/">Back to home</Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
